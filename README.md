@@ -1,6 +1,6 @@
-# My Personal Project
+# 2022W2 CPSC 210 Term Project - Blackjack Scorekeeper
 
-## A subtitle
+## By Jiaying Ong
 
 A *bulleted* list:
 - item 1
