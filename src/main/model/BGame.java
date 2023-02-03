@@ -8,7 +8,7 @@ public class BGame {
     private List<Player> regularPlayerList;
     private Player dealer;
     private int numOfRounds = 0;
-    private static final int MINPLAYERS = 4;
+    private static final int MIN_PLAYERS = 4;
 
     // EFFECTS: constructs a new game of blackjack with an empty list of players
     public BGame() {
@@ -31,10 +31,10 @@ public class BGame {
     // MODIFIES: this
     // EFFECTS: removes a given non-dealer player from the game
     //          fails if player is not in the game
-    //          fails if try to decrease number of regular players < MINPLAYERS
+    //          fails if try to decrease number of regular players < MIN_PLAYERS
     //          return true if success, false if failure
     public boolean removePlayer(Player player) {
-        if (!regularPlayerList.contains(player) | (regularPlayerList.size() <= MINPLAYERS)) {
+        if (!regularPlayerList.contains(player) | (regularPlayerList.size() <= MIN_PLAYERS)) {
             return false;
         } else {
             regularPlayerList.remove(player);
@@ -56,8 +56,11 @@ public class BGame {
     // EFFECTS: returns a new round of blackjack with given players and dealer
     public Round startRound() {
         numOfRounds++;
-        Round rd = new Round(numOfRounds, regularPlayerList, dealer);
-        return rd;
+        for (Player p: regularPlayerList) {
+            p.resetPlayer();
+        }
+        dealer.resetPlayer();
+        return new Round(numOfRounds, regularPlayerList, dealer);
     }
 
     // getters

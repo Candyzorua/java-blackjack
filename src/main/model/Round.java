@@ -3,7 +3,6 @@ package model;
 import java.util.List;
 
 import static model.RoundStatus.BLACKJACK;
-import static model.RoundStatus.STAND;
 
 public class Round {
     private final int roundNumber;
@@ -37,52 +36,59 @@ public class Round {
     }
 
     // MODIFIES: this
+    // EFFECTS: handle payouts when dealer has blackjack
+    public void handleDealerBlackjack() {
+        for (Player p : regularPlayerList) {
+            if (p.getStatus() != BLACKJACK) {
+                p.deductScore(p.getWager() * 2);
+                dealer.addScore(p.getWager() * 2);
+            }
+        }
+    }
+
+    // MODIFIES: this
     // EFFECTS: handle payouts according to player statuses, player hands and blackjack rules
     public void handlePayouts() {
         if (dealer.getStatus() == BLACKJACK) {
-            for (Player p : regularPlayerList) {
-                if (p.getStatus() != BLACKJACK) {
-                    p.deductScore(p.getWager() * 2);
-                    dealer.addScore(p.getWager() * 2);
-                }
-            }
+            handleDealerBlackjack();
         } else {
             for (Player p : regularPlayerList) {
                 switch (p.getStatus()) {
                     case BUST:
-                        p.deductScore(p.getWager());
-                        dealer.addScore(p.getWager());
+                        handleBust(p);
                         break;
                     case STAND:
-                        if (p.getHand() > dealer.getHand()) {
-                            p.addScore(p.getWager());
-                            dealer.deductScore(p.getWager());
-                        } else if (p.getHand() < dealer.getHand()) {
-                            dealer.addScore(p.getWager());
-                            p.deductScore(p.getWager());
-                        }
+                        handleStand(p);
                         break;
                     case BLACKJACK:
-                        p.addScore(p.getWager() * 2);
-                        dealer.deductScore(p.getWager() * 2);
+                        handleBlackjack(p);
                         break;
                 }
             }
         }
     }
 
-    // EFFECTS: displays statuses, total scores, and hands of all players
-    public void displaySummary() {
-        System.out.println("Round Number: " + roundNumber);
-        System.out.println("--- Player Summary ---");
-        for (Player p : regularPlayerList) {
-            System.out.println("Player name: " + p.getName());
-            System.out.println("Round status: " + p.getStatus());
-            System.out.println("Current wager: " + p.getWager());
-            System.out.println("Current hand: " + p.getHand());
-            System.out.println("Total score: " + p.getScore());
-            System.out.println(" ");
+    // EFFECTS: handle payout when a single player busts
+    public void handleBust(Player p) {
+        p.deductScore(p.getWager());
+        dealer.addScore(p.getWager());
+    }
+
+    // EFFECTS: handle payout when a single player stands
+    public void handleStand(Player p) {
+        if (p.getHand() > dealer.getHand()) {
+            p.addScore(p.getWager());
+            dealer.deductScore(p.getWager());
+        } else if (p.getHand() < dealer.getHand()) {
+            dealer.addScore(p.getWager());
+            p.deductScore(p.getWager());
         }
+    }
+
+    // EFFECTS: handle payout when a single player gets blackjack
+    public void handleBlackjack(Player p) {
+        p.addScore(p.getWager() * 2);
+        dealer.deductScore(p.getWager() * 2);
     }
 
     // getters
