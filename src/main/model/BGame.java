@@ -3,10 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BGame {
+public class BGame implements Playable {
 
-    private List<Player> regularPlayerList;
-    private Player dealer;
+    private List<RegularPlayer> regularPlayerList;
+    private Dealer dealer;
     private int numOfRounds = 0;
     private static final int MIN_PLAYERS = 4;
 
@@ -19,7 +19,7 @@ public class BGame {
     // EFFECTS: adds a given player to the game
     //          fails if given player has the same name with another player or the dealer
     //          return true if success, false if failure
-    public boolean addPlayer(Player player) {
+    public boolean addPlayer(RegularPlayer player) {
         if (isPlayerWithNameIn(player.getName())) {
             return false;
         } else {
@@ -33,7 +33,7 @@ public class BGame {
     //          fails if player is not in the game
     //          fails if try to decrease number of regular players < MIN_PLAYERS
     //          return true if success, false if failure
-    public boolean removePlayer(Player player) {
+    public boolean removePlayer(RegularPlayer player) {
         if (!regularPlayerList.contains(player) | (regularPlayerList.size() <= MIN_PLAYERS)) {
             return false;
         } else {
@@ -44,7 +44,7 @@ public class BGame {
 
     // EFFECTS: returns true if a player with the given name is in the game
     public boolean isPlayerWithNameIn(String name) {
-        for (Player p: regularPlayerList) {
+        for (RegularPlayer p: regularPlayerList) {
             if (p.getName().equals(name)) {
                 return true;
             }
@@ -56,7 +56,7 @@ public class BGame {
     // EFFECTS: returns a new round of blackjack with given players and dealer
     public Round startRound() {
         numOfRounds++;
-        for (Player p: regularPlayerList) {
+        for (RegularPlayer p: regularPlayerList) {
             p.resetPlayer();
         }
         dealer.resetPlayer();
@@ -65,16 +65,18 @@ public class BGame {
 
     // getters
 
-    public List<Player> getRegularPlayerList() {
+    @Override
+    public List<RegularPlayer> getRegularPlayers() {
         return regularPlayerList;
+    }
+
+    @Override
+    public Dealer getDealer() {
+        return dealer;
     }
 
     public int getNumOfRounds() {
         return numOfRounds;
-    }
-
-    public Player getDealer() {
-        return dealer;
     }
 
     // setters
@@ -83,18 +85,18 @@ public class BGame {
     // EFFECTS: sets a regular player as dealer
     //          the existing dealer becomes a regular player
     //          if successful return true, if fail return false
-    public boolean setPlayerAsDealer(Player player) {
+    public boolean setPlayerAsDealer(RegularPlayer player) {
         if (!regularPlayerList.contains(player)) {
             return false;
         } else if (dealer == null) {
-            dealer = player;
             regularPlayerList.remove(player);
+            dealer = new Dealer(player.getName(), player.getScore());
             return true;
         } else {
-            Player newPlayer = new Player(dealer.getName(), dealer.getScore());
-            regularPlayerList.remove(player);
+            RegularPlayer newPlayer = new RegularPlayer(dealer.getName(), dealer.getScore());
             regularPlayerList.add(newPlayer);
-            dealer = player;
+            regularPlayerList.remove(player);
+            dealer = new Dealer(player.getName(), player.getScore());
             return true;
         }
     }

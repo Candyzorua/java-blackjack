@@ -1,20 +1,20 @@
 package model;
 
 public class Player {
-    private String name;
+    private final String name;
     private int score;
     private RoundStatus status;
-    private int hand;
+    private Hand hand;
     private int wager;
 
     // REQUIRES: playerName is a non-empty String
-    // EFFECTS: constructs a player with a given name, with zero score, that is not a dealer,
-    //          that doesn't have blackjack, and has pending status
+    // EFFECTS: constructs a player with given name and score,
+    //          pending status and zero wager
     public Player(String playerName, int score) {
         this.name = playerName;
-        this.score = 0;
+        this.score = score;
         this.wager = 0;
-        this.hand = 0;
+        this.hand = new Hand();
         this.status = RoundStatus.PENDING;
     }
 
@@ -31,11 +31,24 @@ public class Player {
     }
 
     // MODIFIES: this
-    // EFFECTS: resets a player's wager to 0 and status to pending
+    // EFFECTS: resets a player's wager to 0, hand to empty, and status to pending
     public void resetPlayer() {
         this.wager = 0;
-        this.hand = 0;
+        hand.empty();
         this.status = RoundStatus.PENDING;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: gets two cards from a given deck
+    public void dealInitialCards(CardDeck cd) {
+        hand.addCard(cd);
+        hand.addCard(cd);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: gets a single card
+    public void drawCard(CardDeck cd) {
+        hand.addCard(cd);
     }
 
     // getters
@@ -52,8 +65,20 @@ public class Player {
         return status;
     }
 
-    public int getHand() {
+    public Hand getHand() {
         return hand;
+    }
+
+    public int getHandSize() {
+        return hand.calculateHand();
+    }
+
+    public String getHandAsString() {
+        String result = "";
+        for (Card c: hand.getContents()) {
+            result += (c.cardToString() + " | ");
+        }
+        return result;
     }
 
     public int getWager() {
@@ -63,12 +88,8 @@ public class Player {
 
     // setters
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
+    public void setHand(Hand hand) {
+        this.hand = hand;
     }
 
     public void setStatus(RoundStatus status) {
@@ -79,7 +100,4 @@ public class Player {
         this.wager = wager;
     }
 
-    public void setHand(int hand) {
-        this.hand = hand;
-    }
 }

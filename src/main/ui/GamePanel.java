@@ -1,12 +1,8 @@
 package ui;
 
-import model.BGame;
-import model.Player;
-import model.Round;
-import model.RoundStatus;
+import model.*;
 
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 public class GamePanel {
 
@@ -23,8 +19,8 @@ public class GamePanel {
 
     // EFFECTS: takes user input on whether the game should continue
     private static boolean shouldRoundContinue() {
-        String continueRoundUserInput = takeInput("Would you like to play another round?"
-                + "Type 'y' for yes, and any other key for no.");
+        System.out.println("Would you like to play another round?");
+        String continueRoundUserInput = takeInput("Type 'y' for yes, and any other key for no.");
         if ("y".equals(continueRoundUserInput)) {
             return true;
         }
@@ -35,16 +31,16 @@ public class GamePanel {
     // MODIFIES: BGame
     // EFFECTS: starts a new round of blackjack
     private static void startNewRound(BGame g1) {
-        System.out.println("Starting a new round!");
+        System.out.println("Starting a new round! Collecting wagers... \n");
         Round r1 = g1.startRound();
         handleRound(r1);
     }
 
     // EFFECTS: enters configuration menu
     private static void configure(BGame g1) {
-        System.out.println("Entering configuration menu...");
+        System.out.println("Entering configuration menu... \n");
         configureGame(g1);
-        System.out.println("Exiting configuration menu...");
+        System.out.println("Exiting configuration menu... \n");
     }
 
     // EFFECTS: handles actions related to game configuration
@@ -75,7 +71,7 @@ public class GamePanel {
     // EFFECTS: tries to add a player to the game and prints appropriate confirmation messages
     private static void addPlayer(BGame g1) {
         String newPlayerName = takeInput("New player name:");
-        boolean result = g1.addPlayer(new Player(newPlayerName, 0));
+        boolean result = g1.addPlayer(new RegularPlayer(newPlayerName, 0));
         if (result) {
             System.out.println("New player " + newPlayerName + " added.");
         } else {
@@ -87,7 +83,7 @@ public class GamePanel {
     // EFFECTS: tries to remove a player from the game and prints appropriate confirmation messages
     private static void removePlayer(BGame g1) {
         String playerName = takeInput("Please select a player to remove");
-        Player playerToRemove = selectPlayer(g1, playerName);
+        RegularPlayer playerToRemove = selectPlayer(g1, playerName);
         boolean result = g1.removePlayer(playerToRemove);
         if (result) {
             System.out.println("Player " + playerToRemove.getName() + " removed.");
@@ -98,7 +94,7 @@ public class GamePanel {
 
     private static void setNewDealer(BGame g1) {
         String dealerName = takeInput("Please select a player to set as the dealer");
-        Player newDealer = selectPlayer(g1, dealerName);
+        RegularPlayer newDealer = selectPlayer(g1, dealerName);
         boolean result = g1.setPlayerAsDealer(newDealer);
         if (result) {
             System.out.println("New dealer " + dealerName + " set.");
@@ -109,8 +105,8 @@ public class GamePanel {
 
     // EFFECTS: returns a regular player with the given name from the list of regular players
     //          returns null if no player with the given name from the list of regular players
-    private static Player selectPlayer(BGame g1, String playerName) {
-        for (Player p: g1.getRegularPlayerList()) {
+    private static RegularPlayer selectPlayer(BGame g1, String playerName) {
+        for (RegularPlayer p: g1.getRegularPlayers()) {
             if (p.getName().equals(playerName)) {
                 return p;
             }
@@ -122,66 +118,72 @@ public class GamePanel {
     private static void displayGameSummary(BGame g1) {
         System.out.println("Displaying game summary...");
         System.out.println("--- Player Summary ---");
-        for (Player p: g1.getRegularPlayerList()) {
-            int playerNum = g1.getRegularPlayerList().indexOf(p) + 1;
-            System.out.println("Player " +  playerNum);
-            System.out.println("Player name: " + p.getName());
-            System.out.println("Total score: " + p.getScore());
-            System.out.println(" ");
+        for (RegularPlayer p: g1.getRegularPlayers()) {
+            displayPlayerSummaryGame(p);
         }
         System.out.println("--- Dealer Summary ---");
-        System.out.println("Dealer name: " + g1.getDealer().getName());
-        System.out.println("Dealer score: " + g1.getDealer().getScore());
+        displayPlayerSummaryGame(g1.getDealer());
+    }
+
+    // EFFECTS: displays a game summary for a single player
+    private static void displayPlayerSummaryGame(Player p) {
+        System.out.println("Player name: " + p.getName());
+        System.out.println("Total score: " + p.getScore());
+        System.out.println(" ");
     }
 
     // EFFECTS: executes a single round of blackjack
     private static void handleRound(Round r1) {
         takeWagers(r1);
-        System.out.println("Time to find out if these players stand, bust or get a blackjack!");
-        System.out.println("Enter 'b' for bust, 's' for stand, and 'bj' for blackjack");
+        System.out.println("\nTime for some very serious business!\n");
         takeStatuses(r1);
-        System.out.println("Now dealing with payouts...");
+        System.out.println("Now dealing with payouts... \n");
         r1.handlePayouts();
         displayRoundSummary(r1);
     }
 
     // EFFECTS: takes wagers of all players
     private static void takeWagers(Round r1) {
-        for (Player p : r1.getRegularPlayerList()) {
-            int wager = Integer.parseInt(takeInput("What is " + p.getName() + "'s wager? "));
+        for (RegularPlayer p : r1.getRegularPlayers()) {
+            int wager = Integer.parseInt(takeInput("What is " + p.getName() + "'s wager?"));
             p.setWager(wager);
         }
     }
 
     // EFFECTS: take round status of a single player
-    private static void takeStatus(Player p) {
-        String status = takeInput("What is " + p.getName() + "'s status? ");
-        switch (status) {
-            case "b":
-                p.setStatus(RoundStatus.BUST);
-                break;
-            case "s":
-                p.setStatus(RoundStatus.STAND);
-                int hand = Integer.parseInt(takeInput("What is " + p.getName() + "'s hand? "));
-                p.setHand(hand);
-                break;
-            case "bj":
-                p.setStatus(RoundStatus.BLACKJACK);
-                System.out.println("Congratulations!");
-                break;
+    private static void takeStatus(Player p, Round r1) {
+        System.out.println("It's " + p.getName() + "'s turn.");
+        if (p.getStatus() == RoundStatus.BLACKJACK) {
+            System.out.println("Congratulations sucker, you got blackjack! \n");
+        }
+
+        while (p.getStatus() == RoundStatus.PENDING) {
+            displayPlayerSummaryRound(p);
+            String choice = takeInput("Enter 'h' to hit and 's' to stand.");
+            switch (choice) {
+                case "s":
+                    System.out.println("Good choice... maybe. \n");
+                    p.setStatus(RoundStatus.STAND);
+                    break;
+                case "h":
+                    System.out.println("Let's see what your luck is like today...");
+                    RoundStatus newPlayerStatus = r1.letPlayerHit(p);
+                    if (newPlayerStatus == RoundStatus.BUST) {
+                        System.out.println("Boom! You busted. \n");
+                    }
+                    break;
+            }
         }
     }
 
     // EFFECTS: take round status of all players
     private static void takeStatuses(Round r1) {
-        for (Player p : r1.getRegularPlayerList()) {
-            displayRoundSummary(r1);
-            takeStatus(p);
+        for (RegularPlayer p : r1.getRegularPlayers()) {
+            takeStatus(p, r1);
         }
-        System.out.println("Time for the dealer...");
-        Player roundDealer = r1.getDealer();
-        displayRoundSummary(r1);
-        takeStatus(roundDealer);
+        System.out.println("Time for the dealer...\n");
+        Dealer roundDealer = r1.getDealer();
+        takeStatus(roundDealer, r1);
     }
 
 
@@ -190,31 +192,37 @@ public class GamePanel {
         System.out.println("Displaying round summary...");
         System.out.println("Round Number: " + r1.getRoundNumber());
         System.out.println("--- Player Summary ---");
-        for (Player p : r1.getRegularPlayerList()) {
-            int playerNum = r1.getRegularPlayerList().indexOf(p) + 1;
-            System.out.println("Player " +  playerNum);
-            System.out.println("Player name: " + p.getName());
-            System.out.println("Round status: " + p.getStatus());
-            System.out.println("Current wager: " + p.getWager());
-            System.out.println("Current hand: " + p.getHand());
-            System.out.println("Total score: " + p.getScore());
-            System.out.println(" ");
+        for (RegularPlayer p : r1.getRegularPlayers()) {
+            displayPlayerSummaryRound(p);
         }
         System.out.println("--- Dealer Summary ---");
-        System.out.println("Dealer name: " + r1.getDealer().getName());
-        System.out.println("Round status: " + r1.getDealer().getStatus());
-        System.out.println("Current hand: " + r1.getDealer().getHand());
-        System.out.println("Total score: " + r1.getDealer().getScore());
+        displayDealerSummaryRound(r1.getDealer());
+    }
+
+    public static void displayPlayerSummaryRound(Player p) {
+        System.out.println("Player name: " + p.getName());
+        System.out.println("Current wager: " + p.getWager());
+        System.out.println("Current hand: " + p.getHandAsString());
+        System.out.println("Round result: " + p.getStatus());
+        System.out.println("Total score: " + p.getScore());
+        System.out.println(" ");
+    }
+
+    public static void displayDealerSummaryRound(Player p) {
+        System.out.println("Dealer name: " + p.getName());
+        System.out.println("Current hand: " + p.getHandAsString());
+        System.out.println("Round result: " + p.getStatus());
+        System.out.println("Total score: " + p.getScore());
         System.out.println(" ");
     }
 
     // EFFECTS: loads the default players into the game
     private static void loadDefaultPlayers(BGame g1) {
-        Player p1 = new Player("Jin", 0);
-        Player p2 = new Player("Mikayla", 0);
-        Player p3 = new Player("Victor", 0);
-        Player p4 = new Player("Leona", 0);
-        Player p5 = new Player("Amy", 0);
+        RegularPlayer p1 = new RegularPlayer("Jin", 0);
+        RegularPlayer p2 = new RegularPlayer("Mikayla", 0);
+        RegularPlayer p3 = new RegularPlayer("Victor", 0);
+        RegularPlayer p4 = new RegularPlayer("Leona", 0);
+        RegularPlayer p5 = new RegularPlayer("Amy", 0);
         g1.addPlayer(p1);
         g1.addPlayer(p2);
         g1.addPlayer(p3);

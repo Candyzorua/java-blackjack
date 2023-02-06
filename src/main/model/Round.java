@@ -3,42 +3,53 @@ package model;
 import java.util.List;
 
 import static model.RoundStatus.BLACKJACK;
+import static model.RoundStatus.BUST;
 
-public class Round {
+public class Round implements Playable {
     private final int roundNumber;
-    private final List<Player> regularPlayerList;
-    private final Player dealer;
+    private final List<RegularPlayer> regularPlayerList;
+    private final Dealer dealer;
+    private final CardDeck cd;
 
     // REQUIRES: regularPlayerList must have at least 1 element
-    // EFFECTS: constructs a new round with given players and dealer
-    public Round(int roundNumber, List<Player> regularPlayerList, Player dealer) {
+    // EFFECTS: constructs a new round with given players, given dealer, and fresh deck of cards, which is dealt
+    public Round(int roundNumber, List<RegularPlayer> regularPlayerList, Dealer dealer) {
         this.roundNumber = roundNumber;
         this.regularPlayerList = regularPlayerList;
         this.dealer = dealer;
+        cd = new CardDeck();
+        dealCardsToAllPlayers();
     }
 
     // MODIFIES: this
-    // EFFECTS: records the given wager of a given player
-    public void recordWager(Player player, int wager) {
-        player.setWager(wager);
+    // EFFECTS: record all players' initial hand and updates their roundStatus if they get blackjack
+    public void dealCardsToAllPlayers() {
+        for (Player p: regularPlayerList) {
+            p.dealInitialCards(cd);
+            if (p.getHandSize() == 21 | p.getHandSize() == 22) {
+                p.setStatus(BLACKJACK);
+            }
+        }
+        dealer.dealInitialCards(cd);
+        if (dealer.getHandSize() == 21 | dealer.getHandSize() == 22) {
+            dealer.setStatus(BLACKJACK);
+        }
     }
 
     // MODIFIES: this
-    // EFFECTS: updates player round status
-    public void recordStatus(Player player, RoundStatus status) {
-        player.setStatus(status);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: record the player's hand
-    public void recordHand(Player player, int hand) {
-        player.setHand(hand);
+    // EFFECTS: the player hits, adjusts player status accordingly, returns new player status
+    public RoundStatus letPlayerHit(Player p) {
+        p.drawCard(cd);
+        if (p.getHandSize() > 21) {
+            p.setStatus(RoundStatus.BUST);
+        }
+        return p.getStatus();
     }
 
     // MODIFIES: this
     // EFFECTS: handle payouts when dealer has blackjack
-    public void handleDealerBlackjack() {
-        for (Player p : regularPlayerList) {
+    private void handleDealerBlackjack() {
+        for (RegularPlayer p : regularPlayerList) {
             if (p.getStatus() != BLACKJACK) {
                 p.deductScore(p.getWager() * 2);
                 dealer.addScore(p.getWager() * 2);
@@ -52,7 +63,7 @@ public class Round {
         if (dealer.getStatus() == BLACKJACK) {
             handleDealerBlackjack();
         } else {
-            for (Player p : regularPlayerList) {
+            for (RegularPlayer p : regularPlayerList) {
                 switch (p.getStatus()) {
                     case BUST:
                         handleBust(p);
@@ -69,24 +80,27 @@ public class Round {
     }
 
     // EFFECTS: handle payout when a single player busts
-    public void handleBust(Player p) {
+    private void handleBust(RegularPlayer p) {
         p.deductScore(p.getWager());
         dealer.addScore(p.getWager());
     }
 
     // EFFECTS: handle payout when a single player stands
-    public void handleStand(Player p) {
-        if (p.getHand() > dealer.getHand()) {
+    private void handleStand(RegularPlayer p) {
+        if (dealer.getStatus() ==  BUST) {
             p.addScore(p.getWager());
             dealer.deductScore(p.getWager());
-        } else if (p.getHand() < dealer.getHand()) {
+        } else if (p.getHandSize() > dealer.getHandSize()) {
+            p.addScore(p.getWager());
+            dealer.deductScore(p.getWager());
+        } else if (p.getHandSize() < dealer.getHandSize()) {
             dealer.addScore(p.getWager());
             p.deductScore(p.getWager());
         }
     }
 
     // EFFECTS: handle payout when a single player gets blackjack
-    public void handleBlackjack(Player p) {
+    private void handleBlackjack(RegularPlayer p) {
         p.addScore(p.getWager() * 2);
         dealer.deductScore(p.getWager() * 2);
     }
@@ -96,11 +110,17 @@ public class Round {
         return roundNumber;
     }
 
-    public Player getDealer() {
+    @Override
+    public Dealer getDealer() {
         return dealer;
     }
 
-    public List<Player> getRegularPlayerList() {
+    @Override
+    public List<RegularPlayer> getRegularPlayers() {
         return regularPlayerList;
+    }
+
+    public CardDeck getCd() {
+        return cd;
     }
 }
