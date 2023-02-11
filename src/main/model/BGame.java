@@ -55,6 +55,7 @@ public class BGame implements Playable {
     // MODIFIES: this
     // EFFECTS: returns a new round of blackjack with given players and dealer,
     //          with all player and dealer hands and wagers set to the initial condition
+    //          number of rounds in the game is incremented
     public Round startRound() {
         numOfRounds++;
         for (RegularPlayer p: regularPlayerList) {

@@ -38,15 +38,15 @@ public class Player {
         this.status = RoundStatus.PENDING;
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, cd
     // EFFECTS: gets two cards from a given deck
     public void dealInitialCards(CardDeck cd) {
         hand.addCard(cd);
         hand.addCard(cd);
     }
 
-    // MODIFIES: this
-    // EFFECTS: gets a single card
+    // MODIFIES: this, cd
+    // EFFECTS: gets a single card from a given deck
     public void drawCard(CardDeck cd) {
         hand.addCard(cd);
     }

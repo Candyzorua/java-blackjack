@@ -36,6 +36,7 @@ public class GamePanel {
         handleRound(r1);
     }
 
+    // MODIFIES: g1
     // EFFECTS: enters game configuration menu
     private static void configure(BGame g1) {
         System.out.println("Entering configuration menu... \n");
@@ -43,6 +44,7 @@ public class GamePanel {
         System.out.println("Exiting configuration menu... \n");
     }
 
+    // MODIFIES: g1
     // EFFECTS: handles actions related to game configuration
     private static void configureGame(BGame g1) {
         boolean keepConfiguring = true;
@@ -69,8 +71,8 @@ public class GamePanel {
 
     // MODIFIES: g1
     // EFFECTS: tries to add a player to the game
-    //          if player with the same name is already in the game, nothing happens
-    //          prints appropriate confirmation messages
+    //          fails if player with the same name is already in the game
+    //          prints appropriate confirmation messages (fail or succeed)
     private static void addPlayer(BGame g1) {
         String newPlayerName = takeInput("New player name:");
         boolean result = g1.addPlayer(new RegularPlayer(newPlayerName, 0));
@@ -84,7 +86,7 @@ public class GamePanel {
     // MODIFIES: g1
     // EFFECTS: tries to remove a player from the game
     //          fails if the number of players <= g1.MIN_PLAYERS
-    //          prints appropriate confirmation messages
+    //          prints appropriate confirmation messages (fail or succeed)
     private static void removePlayer(BGame g1) {
         String playerName = takeInput("Please select a player to remove");
         RegularPlayer playerToRemove = selectPlayer(g1, playerName);
@@ -141,6 +143,7 @@ public class GamePanel {
         System.out.println(" ");
     }
 
+    // MODIFIES: r1
     // EFFECTS: executes a single round of blackjack
     private static void handleRound(Round r1) {
         takeWagers(r1);
@@ -151,6 +154,7 @@ public class GamePanel {
         displayRoundSummary(r1);
     }
 
+    // MODIFIES: r1
     // EFFECTS: takes wagers of all players
     private static void takeWagers(Round r1) {
         for (RegularPlayer p : r1.getRegularPlayers()) {
@@ -159,6 +163,7 @@ public class GamePanel {
         }
     }
 
+    // MODIFIES: p, r1
     // EFFECTS: take round status of a single player
     private static void takeStatus(Player p, Round r1) {
         System.out.println("It's " + p.getName() + "'s turn.");
@@ -185,6 +190,7 @@ public class GamePanel {
         }
     }
 
+    // MODIFIES: r1
     // EFFECTS: take round status of all players
     private static void takeStatuses(Round r1) {
         for (RegularPlayer p : r1.getRegularPlayers()) {
@@ -227,6 +233,7 @@ public class GamePanel {
         System.out.println(" ");
     }
 
+    // MODIFIES: g1
     // EFFECTS: loads the default players into the game
     private static void loadDefaultPlayers(BGame g1) {
         RegularPlayer p1 = new RegularPlayer("Jin", 0);

@@ -12,7 +12,8 @@ public class Round implements Playable {
     private final Player dealer;
     private final CardDeck cd;
 
-    // REQUIRES: regularPlayerList must have at least as many players as specified by the game
+    // REQUIRES: regularPlayerList has at least as many players as the min. number of players
+    //           specified by the game
     // EFFECTS: constructs a new round with given players, given dealer, and fresh deck of cards, which is dealt
     public Round(int roundNumber, List<RegularPlayer> regularPlayerList, Player dealer) {
         this.roundNumber = roundNumber;
@@ -75,18 +76,19 @@ public class Round implements Playable {
                         break;
                     case BLACKJACK:
                         handleBlackjack(p);
-                        break;
                 }
             }
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: handle payout when a single player busts
     private void handleBust(RegularPlayer p) {
         p.deductScore(p.getWager());
         dealer.addScore(p.getWager());
     }
 
+    // MODIFIES: this
     // EFFECTS: handle payout when a single player stands
     private void handleStand(RegularPlayer p) {
         if (dealer.getStatus() ==  BUST) {
@@ -101,6 +103,7 @@ public class Round implements Playable {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: handle payout when a single player gets blackjack
     private void handleBlackjack(RegularPlayer p) {
         p.addScore(p.getWager() * 2);
