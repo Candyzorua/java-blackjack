@@ -11,7 +11,7 @@ This desktop app is made for groups of friends who:
 - Don't want to gamble with real money, and
 - Don't have a large amount of casino chips on hand.
 
-Blackjack is a classic and fun game, but certain things take the fun out of it -- for instance, the illegality of gambling with money in some countries, the prospect of losing hard-earned money, and the unavailability of casino chips in many situations. This app assists with scorekeeping for Blackjack, and intends to make Blackjack a hassle-free experience in which _only a deck of cards_ is needed. This project interests me because I am a huge fan of tabletop games, and often find myself in a position where a scorekeeping tool would help.
+Blackjack is a classic and fun game, but certain things take the fun out of it -- for instance, the illegality of gambling with money in some countries, the prospect of losing hard-earned money, and the unavailability of casino chips in many situations. This app intends to make Blackjack a hassle-free experience in which _only a deck of cards_ is needed. This project interests me because I am a huge fan of tabletop games.
 
 At first, the player will be shown a title screen with 
 "New Game" and "Continue Game". Upon clicking either of these, 
