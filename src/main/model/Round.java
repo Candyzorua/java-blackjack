@@ -6,14 +6,15 @@ import static model.RoundStatus.BLACKJACK;
 import static model.RoundStatus.BUST;
 
 public class Round implements Playable {
+
     private final int roundNumber;
     private final List<RegularPlayer> regularPlayerList;
-    private final Dealer dealer;
+    private final Player dealer;
     private final CardDeck cd;
 
-    // REQUIRES: regularPlayerList must have at least 1 element
+    // REQUIRES: regularPlayerList must have at least as many players as specified by the game
     // EFFECTS: constructs a new round with given players, given dealer, and fresh deck of cards, which is dealt
-    public Round(int roundNumber, List<RegularPlayer> regularPlayerList, Dealer dealer) {
+    public Round(int roundNumber, List<RegularPlayer> regularPlayerList, Player dealer) {
         this.roundNumber = roundNumber;
         this.regularPlayerList = regularPlayerList;
         this.dealer = dealer;
@@ -21,6 +22,7 @@ public class Round implements Playable {
         dealCardsToAllPlayers();
     }
 
+    // REQUIRES: all players' hands must be empty
     // MODIFIES: this
     // EFFECTS: record all players' initial hand and updates their roundStatus if they get blackjack
     public void dealCardsToAllPlayers() {
@@ -111,7 +113,7 @@ public class Round implements Playable {
     }
 
     @Override
-    public Dealer getDealer() {
+    public Player getDealer() {
         return dealer;
     }
 

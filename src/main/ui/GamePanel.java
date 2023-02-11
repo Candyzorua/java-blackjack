@@ -17,7 +17,7 @@ public class GamePanel {
         }
     }
 
-    // EFFECTS: takes user input on whether the game should continue
+    // EFFECTS: takes and returns user input on whether the game should continue
     private static boolean shouldRoundContinue() {
         System.out.println("Would you like to play another round?");
         String continueRoundUserInput = takeInput("Type 'y' for yes, and any other key for no.");
@@ -36,7 +36,7 @@ public class GamePanel {
         handleRound(r1);
     }
 
-    // EFFECTS: enters configuration menu
+    // EFFECTS: enters game configuration menu
     private static void configure(BGame g1) {
         System.out.println("Entering configuration menu... \n");
         configureGame(g1);
@@ -68,7 +68,9 @@ public class GamePanel {
     }
 
     // MODIFIES: g1
-    // EFFECTS: tries to add a player to the game and prints appropriate confirmation messages
+    // EFFECTS: tries to add a player to the game
+    //          if player with the same name is already in the game, nothing happens
+    //          prints appropriate confirmation messages
     private static void addPlayer(BGame g1) {
         String newPlayerName = takeInput("New player name:");
         boolean result = g1.addPlayer(new RegularPlayer(newPlayerName, 0));
@@ -80,7 +82,9 @@ public class GamePanel {
     }
 
     // MODIFIES: g1
-    // EFFECTS: tries to remove a player from the game and prints appropriate confirmation messages
+    // EFFECTS: tries to remove a player from the game
+    //          fails if the number of players <= g1.MIN_PLAYERS
+    //          prints appropriate confirmation messages
     private static void removePlayer(BGame g1) {
         String playerName = takeInput("Please select a player to remove");
         RegularPlayer playerToRemove = selectPlayer(g1, playerName);
@@ -92,6 +96,11 @@ public class GamePanel {
         }
     }
 
+    // MODIFIES: g1
+    // EFFECTS: lets the user set a new regular player as the dealer by name, and the old dealer becomes
+    //          a regular player
+    //          fails if the player gives an invalid name
+    //          prints appropriate confirmation messages
     private static void setNewDealer(BGame g1) {
         String dealerName = takeInput("Please select a player to set as the dealer");
         RegularPlayer newDealer = selectPlayer(g1, dealerName);
@@ -182,7 +191,7 @@ public class GamePanel {
             takeStatus(p, r1);
         }
         System.out.println("Time for the dealer...\n");
-        Dealer roundDealer = r1.getDealer();
+        Player roundDealer = r1.getDealer();
         takeStatus(roundDealer, r1);
     }
 
@@ -199,6 +208,7 @@ public class GamePanel {
         displayDealerSummaryRound(r1.getDealer());
     }
 
+    // EFFECTS: displays the round summary for a single player
     public static void displayPlayerSummaryRound(Player p) {
         System.out.println("Player name: " + p.getName());
         System.out.println("Current wager: " + p.getWager());
@@ -208,6 +218,7 @@ public class GamePanel {
         System.out.println(" ");
     }
 
+    // EFFECTS: displays the dealer summary for a player
     public static void displayDealerSummaryRound(Player p) {
         System.out.println("Dealer name: " + p.getName());
         System.out.println("Current hand: " + p.getHandAsString());
@@ -231,7 +242,7 @@ public class GamePanel {
         g1.setPlayerAsDealer(p5);
     }
 
-    // EFFECTS: takes input with given prompt
+    // EFFECTS: takes and returns user input with given prompt
     private static String takeInput(String question) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(question);

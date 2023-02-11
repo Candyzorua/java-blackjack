@@ -6,7 +6,7 @@ import java.util.List;
 public class BGame implements Playable {
 
     private List<RegularPlayer> regularPlayerList;
-    private Dealer dealer;
+    private Player dealer;
     private int numOfRounds = 0;
     private static final int MIN_PLAYERS = 4;
 
@@ -53,7 +53,8 @@ public class BGame implements Playable {
     }
 
     // MODIFIES: this
-    // EFFECTS: returns a new round of blackjack with given players and dealer
+    // EFFECTS: returns a new round of blackjack with given players and dealer,
+    //          with all player and dealer hands and wagers set to the initial condition
     public Round startRound() {
         numOfRounds++;
         for (RegularPlayer p: regularPlayerList) {
@@ -71,7 +72,7 @@ public class BGame implements Playable {
     }
 
     @Override
-    public Dealer getDealer() {
+    public Player getDealer() {
         return dealer;
     }
 
@@ -84,19 +85,20 @@ public class BGame implements Playable {
     // MODIFIES: this
     // EFFECTS: sets a regular player as dealer
     //          the existing dealer becomes a regular player
+    //          fails if the given player is not in the list of players
     //          if successful return true, if fail return false
     public boolean setPlayerAsDealer(RegularPlayer player) {
         if (!regularPlayerList.contains(player)) {
             return false;
         } else if (dealer == null) {
             regularPlayerList.remove(player);
-            dealer = new Dealer(player.getName(), player.getScore());
+            dealer = new Player(player.getName(), player.getScore());
             return true;
         } else {
             RegularPlayer newPlayer = new RegularPlayer(dealer.getName(), dealer.getScore());
             regularPlayerList.add(newPlayer);
             regularPlayerList.remove(player);
-            dealer = new Dealer(player.getName(), player.getScore());
+            dealer = new Player(player.getName(), player.getScore());
             return true;
         }
     }

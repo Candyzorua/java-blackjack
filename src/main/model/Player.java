@@ -73,6 +73,7 @@ public class Player {
         return hand.calculateHand();
     }
 
+    // EFFECTS: displays the entire hand in string format
     public String getHandAsString() {
         String result = "";
         for (Card c: hand.getContents()) {

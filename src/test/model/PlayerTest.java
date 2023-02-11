@@ -21,7 +21,7 @@ class PlayerTest {
         h1 = new Hand();
         h1.addCard(c1);
         cd1 = new CardDeck();
-        p2 = new Dealer("Mikayla", 19);
+        p2 = new Player("Mikayla", 19);
     }
 
     @Test
