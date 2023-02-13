@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * A single player in Blackjack
+ */
+
 public class Player {
     private final String name;
     private int score;

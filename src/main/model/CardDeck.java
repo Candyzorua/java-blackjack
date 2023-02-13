@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A standard deck of cards
+ */
+
 public class CardDeck {
     private List<Card> contents;
 

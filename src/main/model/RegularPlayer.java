@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * A non-dealer player in Blackjack
+ */
+
 public class RegularPlayer extends Player {
 
     // REQUIRES: playerName is a non-empty String

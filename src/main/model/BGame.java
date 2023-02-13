@@ -3,6 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A single game of Blackjack
+ */
+
 public class BGame implements Playable {
 
     private List<RegularPlayer> regularPlayerList;

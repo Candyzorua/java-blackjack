@@ -5,6 +5,10 @@ import java.util.List;
 import static model.RoundStatus.BLACKJACK;
 import static model.RoundStatus.BUST;
 
+/**
+ * A single round in a game of Blackjack
+ */
+
 public class Round implements Playable {
 
     private final int roundNumber;

@@ -4,6 +4,10 @@ import model.*;
 
 import java.util.Scanner;
 
+/**
+ * Main UI for this program
+ */
+
 public class GamePanel {
 
     public static void main(String[] args) {
@@ -211,22 +215,13 @@ public class GamePanel {
             displayPlayerSummaryRound(p);
         }
         System.out.println("--- Dealer Summary ---");
-        displayDealerSummaryRound(r1.getDealer());
+        displayPlayerSummaryRound(r1.getDealer());
     }
 
     // EFFECTS: displays the round summary for a single player
     public static void displayPlayerSummaryRound(Player p) {
         System.out.println("Player name: " + p.getName());
         System.out.println("Current wager: " + p.getWager());
-        System.out.println("Current hand: " + p.getHandAsString());
-        System.out.println("Round result: " + p.getStatus());
-        System.out.println("Total score: " + p.getScore());
-        System.out.println(" ");
-    }
-
-    // EFFECTS: displays the dealer summary for a player
-    public static void displayDealerSummaryRound(Player p) {
-        System.out.println("Dealer name: " + p.getName());
         System.out.println("Current hand: " + p.getHandAsString());
         System.out.println("Round result: " + p.getStatus());
         System.out.println("Total score: " + p.getScore());

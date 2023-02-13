@@ -3,6 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A single blackjack hand
+ */
+
 public class Hand {
     private List<Card> contents;
 
