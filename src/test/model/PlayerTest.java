@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class PlayerTest {
-    private RegularPlayer p1;
+    private Player p1;
     private Player p2;
     private Hand h1;
     private Card c1;
@@ -16,7 +16,7 @@ class PlayerTest {
 
     @BeforeEach
     public void runBefore() {
-        p1 = new RegularPlayer("Jin", 0);
+        p1 = new Player("Jin", 0);
         c1 = new Card("diamonds", "K", 10);
         h1 = new Hand();
         h1.addCard(c1);

@@ -15,11 +15,11 @@
     {
       "name": "Leona",
       "score": "0"
+    },
+    {
+      "name": "Amy",
+      "score": "0"
     }
   ],
-  "dealer": {
-    "name": "Amy",
-    "score": "0"
-  },
   "numOfRounds": "0"
 }

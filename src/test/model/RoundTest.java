@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RoundTest {
     private Round r1;
     private Player d1;
-    private RegularPlayer p2;
-    private RegularPlayer p3;
-    private List<RegularPlayer> regularPlayerList;
+    private Player p2;
+    private Player p3;
+    private List<Player> regularPlayerList;
     Card c1;
     Card c2;
     Card c3;
@@ -24,8 +24,8 @@ public class RoundTest {
     @BeforeEach
     public void runBefore() {
         d1 = new Player("Jin", 0);
-        p2 = new RegularPlayer("Amy", 0);
-        p3 = new RegularPlayer("Tracy", 0);
+        p2 = new Player("Amy", 0);
+        p3 = new Player("Tracy", 0);
         regularPlayerList = new ArrayList<>();
         regularPlayerList.add(p2);
         regularPlayerList.add(p3);
@@ -51,8 +51,8 @@ public class RoundTest {
     public void testDealCardsToAllPlayersSetBlackjack() {
         for (int i = 0; i < 99999; i++) {
             d1 = new Player("Jin", 0);
-            p2 = new RegularPlayer("Amy", 0);
-            p3 = new RegularPlayer("Tracy", 0);
+            p2 = new Player("Amy", 0);
+            p3 = new Player("Tracy", 0);
             regularPlayerList = new ArrayList<>();
             regularPlayerList.add(p2);
             regularPlayerList.add(p3);
@@ -73,8 +73,8 @@ public class RoundTest {
     public void testLetPlayerHit() {
         for (int i = 0; i < 99999; i++) {
             d1 = new Player("Jin", 0);
-            p2 = new RegularPlayer("Amy", 0);
-            p3 = new RegularPlayer("Tracy", 0);
+            p2 = new Player("Amy", 0);
+            p3 = new Player("Tracy", 0);
             regularPlayerList = new ArrayList<>();
             regularPlayerList.add(p2);
             regularPlayerList.add(p3);

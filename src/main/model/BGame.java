@@ -9,13 +9,20 @@ import java.util.List;
 
 public class BGame implements Playable {
 
-    private List<RegularPlayer> regularPlayerList;
+    private List<Player> regularPlayerList;
     private Player dealer;
-    private int numOfRounds = 0;
+    private int numOfRounds;
     private static final int MIN_PLAYERS = 4;
 
     // EFFECTS: constructs a new game of blackjack with an empty list of players
     public BGame() {
+        numOfRounds = 0;
+        regularPlayerList = new ArrayList<>();
+    }
+
+    // EFFECTS: constructs a new game of blackjack with an empty list of players and given number of rounds
+    public BGame(int n) {
+        numOfRounds = n;
         regularPlayerList = new ArrayList<>();
     }
 
@@ -23,7 +30,7 @@ public class BGame implements Playable {
     // EFFECTS: adds a given player to the game
     //          fails if given player has the same name with another player or the dealer
     //          return true if success, false if failure
-    public boolean addPlayer(RegularPlayer player) {
+    public boolean addPlayer(Player player) {
         if (isPlayerWithNameIn(player.getName())) {
             return false;
         } else {
@@ -37,7 +44,7 @@ public class BGame implements Playable {
     //          fails if player is not in the game
     //          fails if try to decrease number of regular players < MIN_PLAYERS
     //          return true if success, false if failure
-    public boolean removePlayer(RegularPlayer player) {
+    public boolean removePlayer(Player player) {
         if (!regularPlayerList.contains(player) | (regularPlayerList.size() <= MIN_PLAYERS)) {
             return false;
         } else {
@@ -48,7 +55,7 @@ public class BGame implements Playable {
 
     // EFFECTS: returns true if a player with the given name is in the game
     public boolean isPlayerWithNameIn(String name) {
-        for (RegularPlayer p: regularPlayerList) {
+        for (Player p: regularPlayerList) {
             if (p.getName().equals(name)) {
                 return true;
             }
@@ -62,7 +69,7 @@ public class BGame implements Playable {
     //          number of rounds in the game is incremented
     public Round startRound() {
         numOfRounds++;
-        for (RegularPlayer p: regularPlayerList) {
+        for (Player p: regularPlayerList) {
             p.resetPlayer();
         }
         dealer.resetPlayer();
@@ -72,7 +79,7 @@ public class BGame implements Playable {
     // getters
 
     @Override
-    public List<RegularPlayer> getRegularPlayers() {
+    public List<Player> getRegularPlayers() {
         return regularPlayerList;
     }
 
@@ -92,7 +99,7 @@ public class BGame implements Playable {
     //          the existing dealer becomes a regular player
     //          fails if the given player is not in the list of players
     //          if successful return true, if fail return false
-    public boolean setPlayerAsDealer(RegularPlayer player) {
+    public boolean setPlayerAsDealer(Player player) {
         if (!regularPlayerList.contains(player)) {
             return false;
         } else if (dealer == null) {
@@ -100,7 +107,7 @@ public class BGame implements Playable {
             dealer = new Player(player.getName(), player.getScore());
             return true;
         } else {
-            RegularPlayer newPlayer = new RegularPlayer(dealer.getName(), dealer.getScore());
+            Player newPlayer = new Player(dealer.getName(), dealer.getScore());
             regularPlayerList.add(newPlayer);
             regularPlayerList.remove(player);
             dealer = new Player(player.getName(), player.getScore());

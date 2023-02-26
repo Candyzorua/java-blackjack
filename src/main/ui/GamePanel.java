@@ -79,7 +79,7 @@ public class GamePanel {
     //          prints appropriate confirmation messages (fail or succeed)
     private static void addPlayer(BGame g1) {
         String newPlayerName = takeInput("New player name:");
-        boolean result = g1.addPlayer(new RegularPlayer(newPlayerName, 0));
+        boolean result = g1.addPlayer(new Player(newPlayerName, 0));
         if (result) {
             System.out.println("New player " + newPlayerName + " added.");
         } else {
@@ -93,7 +93,7 @@ public class GamePanel {
     //          prints appropriate confirmation messages (fail or succeed)
     private static void removePlayer(BGame g1) {
         String playerName = takeInput("Please select a player to remove");
-        RegularPlayer playerToRemove = selectPlayer(g1, playerName);
+        Player playerToRemove = selectPlayer(g1, playerName);
         boolean result = g1.removePlayer(playerToRemove);
         if (result) {
             System.out.println("Player " + playerToRemove.getName() + " removed.");
@@ -109,7 +109,7 @@ public class GamePanel {
     //          prints appropriate confirmation messages
     private static void setNewDealer(BGame g1) {
         String dealerName = takeInput("Please select a player to set as the dealer");
-        RegularPlayer newDealer = selectPlayer(g1, dealerName);
+        Player newDealer = selectPlayer(g1, dealerName);
         boolean result = g1.setPlayerAsDealer(newDealer);
         if (result) {
             System.out.println("New dealer " + dealerName + " set.");
@@ -120,8 +120,8 @@ public class GamePanel {
 
     // EFFECTS: returns a regular player with the given name from the list of regular players
     //          returns null if no player with the given name from the list of regular players
-    private static RegularPlayer selectPlayer(BGame g1, String playerName) {
-        for (RegularPlayer p: g1.getRegularPlayers()) {
+    private static Player selectPlayer(BGame g1, String playerName) {
+        for (Player p: g1.getRegularPlayers()) {
             if (p.getName().equals(playerName)) {
                 return p;
             }
@@ -133,7 +133,7 @@ public class GamePanel {
     private static void displayGameSummary(BGame g1) {
         System.out.println("Displaying game summary...");
         System.out.println("--- Player Summary ---");
-        for (RegularPlayer p: g1.getRegularPlayers()) {
+        for (Player p: g1.getRegularPlayers()) {
             displayPlayerSummaryGame(p);
         }
         System.out.println("--- Dealer Summary ---");
@@ -161,7 +161,7 @@ public class GamePanel {
     // MODIFIES: r1
     // EFFECTS: takes wagers of all players
     private static void takeWagers(Round r1) {
-        for (RegularPlayer p : r1.getRegularPlayers()) {
+        for (Player p : r1.getRegularPlayers()) {
             int wager = Integer.parseInt(takeInput("What is " + p.getName() + "'s wager?"));
             p.setWager(wager);
         }
@@ -197,7 +197,7 @@ public class GamePanel {
     // MODIFIES: r1
     // EFFECTS: take round status of all players
     private static void takeStatuses(Round r1) {
-        for (RegularPlayer p : r1.getRegularPlayers()) {
+        for (Player p : r1.getRegularPlayers()) {
             takeStatus(p, r1);
         }
         System.out.println("Time for the dealer...\n");
@@ -211,7 +211,7 @@ public class GamePanel {
         System.out.println("Displaying round summary...");
         System.out.println("Round Number: " + r1.getRoundNumber());
         System.out.println("--- Player Summary ---");
-        for (RegularPlayer p : r1.getRegularPlayers()) {
+        for (Player p : r1.getRegularPlayers()) {
             displayPlayerSummaryRound(p);
         }
         System.out.println("--- Dealer Summary ---");
@@ -231,11 +231,11 @@ public class GamePanel {
     // MODIFIES: g1
     // EFFECTS: loads the default players into the game
     private static void loadDefaultPlayers(BGame g1) {
-        RegularPlayer p1 = new RegularPlayer("Jin", 0);
-        RegularPlayer p2 = new RegularPlayer("Mikayla", 0);
-        RegularPlayer p3 = new RegularPlayer("Victor", 0);
-        RegularPlayer p4 = new RegularPlayer("Leona", 0);
-        RegularPlayer p5 = new RegularPlayer("Amy", 0);
+        Player p1 = new Player("Jin", 0);
+        Player p2 = new Player("Mikayla", 0);
+        Player p3 = new Player("Victor", 0);
+        Player p4 = new Player("Leona", 0);
+        Player p5 = new Player("Amy", 0);
         g1.addPlayer(p1);
         g1.addPlayer(p2);
         g1.addPlayer(p3);

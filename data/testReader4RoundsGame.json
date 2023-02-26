@@ -15,11 +15,11 @@
     {
       "name": "Oliver",
       "score": "0"
+    },
+    {
+      "name": "Munn",
+      "score": "0"
     }
   ],
-  "dealer": {
-    "name": "Munn",
-    "score": "0"
-  },
   "numOfRounds": "4"
 }

@@ -7,22 +7,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BGameTest {
     private BGame g1;
-    private RegularPlayer p1;
-    private RegularPlayer p2;
-    private RegularPlayer p3;
-    private RegularPlayer p4;
-    private RegularPlayer p5;
-    private RegularPlayer p6;
+    private Player p1;
+    private Player p2;
+    private Player p3;
+    private Player p4;
+    private Player p5;
+    private Player p6;
 
     @BeforeEach
     public void runBefore() {
         g1 = new BGame();
-        p1 = new RegularPlayer("Amy", 0);
-        p2 = new RegularPlayer("Leona", 0);
-        p3 = new RegularPlayer("Christy", 0);
-        p4 = new RegularPlayer("Anna", 0);
-        p5 = new RegularPlayer("Squidward", 0);
-        p6 = new RegularPlayer("Elsa", 0);
+        p1 = new Player("Amy", 0);
+        p2 = new Player("Leona", 0);
+        p3 = new Player("Christy", 0);
+        p4 = new Player("Anna", 0);
+        p5 = new Player("Squidward", 0);
+        p6 = new Player("Elsa", 0);
     }
 
     @Test
