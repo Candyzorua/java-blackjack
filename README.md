@@ -53,4 +53,4 @@ menu, or save and quit to the title screen.
     - Quit without saving
     - Continue to the next round
 
-- As a user, when starting up a new game, I want to be able to load a game from previous save file or start a fresh game.*As a user, when starting up a new game, I want to be able to load a game from previous save file or start a fresh game.
+- As a user, when starting up a new game, I want to be able to load a game from previous save file or start a fresh game.
