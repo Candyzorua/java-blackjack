@@ -83,6 +83,10 @@ public class BGame implements Playable {
         return regularPlayerList;
     }
 
+    public int getNumPlayers() {
+        return regularPlayerList.size();
+    }
+
     @Override
     public Player getDealer() {
         return dealer;

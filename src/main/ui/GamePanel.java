@@ -1,7 +1,11 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -9,20 +13,54 @@ import java.util.Scanner;
  */
 
 public class GamePanel {
+    private static final String JSON_STORE = "./data/game.json";
+    private BGame bg;
+    // private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
-    public static void main(String[] args) {
+    // EFFECTS: constructs GamePanel and runs application
+    public GamePanel() throws FileNotFoundException {
+        bg = new BGame();
+        // jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+        runGamePanel();
+    }
+
+    private void runGamePanel() {
         boolean continueGame = true;
-        BGame g1 = new BGame();
-        loadDefaultPlayers(g1);
+        System.out.println("Welcome to Java Blackjack!");
+        shouldLoadGame();
         while (continueGame) {
-            configure(g1);
-            startNewRound(g1);
+            configure(bg);
+            startNewRound(bg);
             continueGame = shouldRoundContinue();
         }
     }
 
+    // EFFECTS: takes user input on whether previous game should be loaded and loads game if answer is yes
+    private void shouldLoadGame() {
+        System.out.println("Would you like to load a game?");
+        String continueRoundUserInput = takeInput("Type 'y' for yes, and any other key for no.");
+        if ("y".equals(continueRoundUserInput)) {
+            loadGame();
+        } else {
+            System.out.println("Starting on a clean slate!");
+            loadDefaultPlayers(bg);
+        }
+    }
+
+//    // EFFECTS: takes user input on whether the game should be saved and saves game if answer is yes
+//    private void shouldSaveGame() {
+//        System.out.println("Would you like to save this game");
+//        String continueRoundUserInput = takeInput("Type 'y' for yes, and any other key for no.");
+//        if ("y".equals(continueRoundUserInput)) {
+//            saveGame();
+//        }
+//        System.out.println("Thanks for playing!");
+//    }
+
     // EFFECTS: takes and returns user input on whether the game should continue
-    private static boolean shouldRoundContinue() {
+    private boolean shouldRoundContinue() {
         System.out.println("Would you like to play another round?");
         String continueRoundUserInput = takeInput("Type 'y' for yes, and any other key for no.");
         if ("y".equals(continueRoundUserInput)) {
@@ -34,7 +72,7 @@ public class GamePanel {
 
     // MODIFIES: BGame
     // EFFECTS: starts a new round of blackjack
-    private static void startNewRound(BGame g1) {
+    private void startNewRound(BGame g1) {
         System.out.println("Starting a new round! Collecting wagers... \n");
         Round r1 = g1.startRound();
         handleRound(r1);
@@ -42,7 +80,7 @@ public class GamePanel {
 
     // MODIFIES: g1
     // EFFECTS: enters game configuration menu
-    private static void configure(BGame g1) {
+    private void configure(BGame g1) {
         System.out.println("Entering configuration menu... \n");
         configureGame(g1);
         System.out.println("Exiting configuration menu... \n");
@@ -50,7 +88,7 @@ public class GamePanel {
 
     // MODIFIES: g1
     // EFFECTS: handles actions related to game configuration
-    private static void configureGame(BGame g1) {
+    private void configureGame(BGame g1) {
         boolean keepConfiguring = true;
         while (keepConfiguring) {
             displayGameSummary(g1);
@@ -77,7 +115,7 @@ public class GamePanel {
     // EFFECTS: tries to add a player to the game
     //          fails if player with the same name is already in the game
     //          prints appropriate confirmation messages (fail or succeed)
-    private static void addPlayer(BGame g1) {
+    private void addPlayer(BGame g1) {
         String newPlayerName = takeInput("New player name:");
         boolean result = g1.addPlayer(new Player(newPlayerName, 0));
         if (result) {
@@ -91,7 +129,7 @@ public class GamePanel {
     // EFFECTS: tries to remove a player from the game
     //          fails if the number of players <= g1.MIN_PLAYERS
     //          prints appropriate confirmation messages (fail or succeed)
-    private static void removePlayer(BGame g1) {
+    private void removePlayer(BGame g1) {
         String playerName = takeInput("Please select a player to remove");
         Player playerToRemove = selectPlayer(g1, playerName);
         boolean result = g1.removePlayer(playerToRemove);
@@ -107,7 +145,7 @@ public class GamePanel {
     //          a regular player
     //          fails if the player gives an invalid name
     //          prints appropriate confirmation messages
-    private static void setNewDealer(BGame g1) {
+    private void setNewDealer(BGame g1) {
         String dealerName = takeInput("Please select a player to set as the dealer");
         Player newDealer = selectPlayer(g1, dealerName);
         boolean result = g1.setPlayerAsDealer(newDealer);
@@ -120,7 +158,7 @@ public class GamePanel {
 
     // EFFECTS: returns a regular player with the given name from the list of regular players
     //          returns null if no player with the given name from the list of regular players
-    private static Player selectPlayer(BGame g1, String playerName) {
+    private Player selectPlayer(BGame g1, String playerName) {
         for (Player p: g1.getRegularPlayers()) {
             if (p.getName().equals(playerName)) {
                 return p;
@@ -130,7 +168,7 @@ public class GamePanel {
     }
 
     // EFFECTS: displays a summary of the game
-    private static void displayGameSummary(BGame g1) {
+    private void displayGameSummary(BGame g1) {
         System.out.println("Displaying game summary...");
         System.out.println("--- Player Summary ---");
         for (Player p: g1.getRegularPlayers()) {
@@ -141,7 +179,7 @@ public class GamePanel {
     }
 
     // EFFECTS: displays a game summary for a single player
-    private static void displayPlayerSummaryGame(Player p) {
+    private void displayPlayerSummaryGame(Player p) {
         System.out.println("Player name: " + p.getName());
         System.out.println("Total score: " + p.getScore());
         System.out.println(" ");
@@ -149,7 +187,7 @@ public class GamePanel {
 
     // MODIFIES: r1
     // EFFECTS: executes a single round of blackjack
-    private static void handleRound(Round r1) {
+    private void handleRound(Round r1) {
         takeWagers(r1);
         System.out.println("\nTime for some very serious business!\n");
         takeStatuses(r1);
@@ -160,7 +198,7 @@ public class GamePanel {
 
     // MODIFIES: r1
     // EFFECTS: takes wagers of all players
-    private static void takeWagers(Round r1) {
+    private void takeWagers(Round r1) {
         for (Player p : r1.getRegularPlayers()) {
             int wager = Integer.parseInt(takeInput("What is " + p.getName() + "'s wager?"));
             p.setWager(wager);
@@ -169,7 +207,7 @@ public class GamePanel {
 
     // MODIFIES: p, r1
     // EFFECTS: take round status of a single player
-    private static void takeStatus(Player p, Round r1) {
+    private void takeStatus(Player p, Round r1) {
         System.out.println("It's " + p.getName() + "'s turn.");
         if (p.getStatus() == RoundStatus.BLACKJACK) {
             System.out.println("Congratulations sucker, you got blackjack! \n");
@@ -196,7 +234,7 @@ public class GamePanel {
 
     // MODIFIES: r1
     // EFFECTS: take round status of all players
-    private static void takeStatuses(Round r1) {
+    private void takeStatuses(Round r1) {
         for (Player p : r1.getRegularPlayers()) {
             takeStatus(p, r1);
         }
@@ -207,7 +245,7 @@ public class GamePanel {
 
 
     // EFFECTS: displays statuses, total scores, and hands of all players
-    public static void displayRoundSummary(Round r1) {
+    public void displayRoundSummary(Round r1) {
         System.out.println("Displaying round summary...");
         System.out.println("Round Number: " + r1.getRoundNumber());
         System.out.println("--- Player Summary ---");
@@ -219,7 +257,7 @@ public class GamePanel {
     }
 
     // EFFECTS: displays the round summary for a single player
-    public static void displayPlayerSummaryRound(Player p) {
+    public void displayPlayerSummaryRound(Player p) {
         System.out.println("Player name: " + p.getName());
         System.out.println("Current wager: " + p.getWager());
         System.out.println("Current hand: " + p.getHandAsString());
@@ -230,7 +268,7 @@ public class GamePanel {
 
     // MODIFIES: g1
     // EFFECTS: loads the default players into the game
-    private static void loadDefaultPlayers(BGame g1) {
+    private void loadDefaultPlayers(BGame g1) {
         Player p1 = new Player("Jin", 0);
         Player p2 = new Player("Mikayla", 0);
         Player p3 = new Player("Victor", 0);
@@ -245,9 +283,35 @@ public class GamePanel {
     }
 
     // EFFECTS: takes and returns user input with given prompt
-    private static String takeInput(String question) {
+    private String takeInput(String question) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(question);
         return scanner.nextLine();
+    }
+
+//    // EFFECTS: saves the game to file
+//    private void saveWorkRoom() {
+//        try {
+//            jsonWriter.open();
+//            jsonWriter.write(workRoom);
+//            jsonWriter.close();
+//            System.out.println("Saved " + workRoom.getName() + " to " + JSON_STORE);
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Unable to write to file: " + JSON_STORE);
+//        }
+//    }
+
+    // MODIFIES: this
+    // EFFECTS: loads game from file and automatically sets the last player as the dealer
+    private void loadGame() {
+        try {
+            bg = jsonReader.read();
+            System.out.println("Loaded game from " + JSON_STORE + ".");
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE + ".");
+        }
+        Player lastPlayer = bg.getRegularPlayers().get(bg.getNumPlayers() - 1);
+        bg.setPlayerAsDealer(lastPlayer);
+        System.out.println("The last player has been set as the dealer by default.");
     }
 }
