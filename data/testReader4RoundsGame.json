@@ -1,0 +1,25 @@
+{
+  "players": [
+    {
+      "name": "Jin",
+      "score": "-100"
+    },
+    {
+      "name": "Timothy",
+      "score": "-200"
+    },
+    {
+      "name": "Tracy",
+      "score": "300"
+    },
+    {
+      "name": "Oliver",
+      "score": "0"
+    }
+  ],
+  "dealer": {
+    "name": "Munn",
+    "score": "0"
+  },
+  "numOfRounds": "4"
+}
