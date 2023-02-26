@@ -30,14 +30,7 @@ across rounds if players continue to the next round. In between rounds,
 there will be options to continue to the next round, go to the player configuration 
 menu, or save and quit to the title screen.
 
-## User Stories
-
-### General
-- As a user, I want to be able to click an exit button at any time to close the application.
-
-### Title Screen
-- As a user, I want to be able to click "New Game" to enter the player configuration menu of a new game, where the scores of all players are 0.
-- As a user, I want to be able to enter the player configuration menu of a previously played game, where the scores of all players are conserved from the previously played game.
+## Phase 1 User Stories
 
 ### Player Configuration Menu
 - *As a user, I want to be able to add or delete players.
@@ -51,4 +44,13 @@ menu, or save and quit to the title screen.
 - *As a user, I want to be able to see the status of every player at any moment in the round, be it "bust", "stand", or "pending", their current wager, and also their current score.
 - *As a user, at the end of every round, I want to be displayed a summary of player scores, and to be given the option to quit to title screen, or to enter the player configuration menu before playing a new round.
 
-_Note: * denotes that this user story has been implemented in Phase 1._
+## Phase 2 User Stories
+
+### Data Persistence
+- As a user, after the end of every round, I want to be given the option to either:
+
+    - Save and quit
+    - Quit without saving
+    - Continue to the next round
+
+- As a user, when starting up a new game, I want to be able to load a game from previous save file or start a fresh game.*As a user, when starting up a new game, I want to be able to load a game from previous save file or start a fresh game.
