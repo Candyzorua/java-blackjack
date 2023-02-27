@@ -1,25 +1,25 @@
 {
-  "players": [
-    {
-      "name": "Jin",
-      "score": "0"
-    },
-    {
-      "name": "Mikayla",
-      "score": "0"
-    },
-    {
-      "name": "Victor",
-      "score": "0"
-    },
-    {
-      "name": "Leona",
-      "score": "0"
-    },
-    {
-      "name": "Amy",
-      "score": "0"
-    }
-  ],
-  "numOfRounds": "0"
+    "numOfRounds": "2",
+    "players": [
+        {
+            "score": "-7",
+            "name": "Jin"
+        },
+        {
+            "score": "-7",
+            "name": "Mikayla"
+        },
+        {
+            "score": "-7",
+            "name": "Victor"
+        },
+        {
+            "score": "-7",
+            "name": "Leona"
+        },
+        {
+            "score": "28",
+            "name": "Amy"
+        }
+    ]
 }

@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 /**
  * A single player in Blackjack
  */
 
-public class Player {
+public class Player implements Writable {
     private final String name;
     private int score;
     private RoundStatus status;
@@ -105,4 +108,11 @@ public class Player {
         this.wager = wager;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("score", Integer.toString(score));
+        return json;
+    }
 }

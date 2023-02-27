@@ -126,19 +126,19 @@ public class BGame implements Playable, Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("numOfRounds", numOfRounds);
+        json.put("numOfRounds", Integer.toString(numOfRounds));
         json.put("players", playersToJson());
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns all players including dealer as a JSON array
     private JSONArray playersToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Player p : regularPlayerList) {
             jsonArray.put(p.toJson());
         }
-
+        jsonArray.put(dealer.toJson());
         return jsonArray;
     }
 }

@@ -16,13 +16,13 @@ import java.util.Scanner;
 public class GamePanel {
     private static final String JSON_STORE = "./data/game.json";
     private BGame bg;
-    // private JsonWriter jsonWriter;
+    private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
     // EFFECTS: constructs GamePanel and runs application
     public GamePanel() throws FileNotFoundException {
         bg = new BGame();
-        // jsonWriter = new JsonWriter(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         runGamePanel();
     }
@@ -36,6 +36,7 @@ public class GamePanel {
             startNewRound(bg);
             continueGame = shouldRoundContinue();
         }
+        shouldSaveGame();
     }
 
     // EFFECTS: takes user input on whether previous game should be loaded and loads game if answer is yes
@@ -50,25 +51,21 @@ public class GamePanel {
         }
     }
 
-//    // EFFECTS: takes user input on whether the game should be saved and saves game if answer is yes
-//    private void shouldSaveGame() {
-//        System.out.println("Would you like to save this game");
-//        String continueRoundUserInput = takeInput("Type 'y' for yes, and any other key for no.");
-//        if ("y".equals(continueRoundUserInput)) {
-//            saveGame();
-//        }
-//        System.out.println("Thanks for playing!");
-//    }
+    // EFFECTS: takes user input on whether the game should be saved and saves game if answer is yes
+    private void shouldSaveGame() {
+        System.out.println("Would you like to save this game?");
+        String continueRoundUserInput = takeInput("Type 'y' for yes, and any other key for no.");
+        if ("y".equals(continueRoundUserInput)) {
+            saveGame();
+        }
+        System.out.println("Thanks for playing!");
+    }
 
     // EFFECTS: takes and returns user input on whether the game should continue
     private boolean shouldRoundContinue() {
         System.out.println("Would you like to play another round?");
         String continueRoundUserInput = takeInput("Type 'y' for yes, and any other key for no.");
-        if ("y".equals(continueRoundUserInput)) {
-            return true;
-        }
-        System.out.println("Thanks for playing!");
-        return false;
+        return "y".equals(continueRoundUserInput);
     }
 
     // MODIFIES: BGame
@@ -290,17 +287,17 @@ public class GamePanel {
         return scanner.nextLine();
     }
 
-//    // EFFECTS: saves the game to file
-//    private void saveWorkRoom() {
-//        try {
-//            jsonWriter.open();
-//            jsonWriter.write(workRoom);
-//            jsonWriter.close();
-//            System.out.println("Saved " + workRoom.getName() + " to " + JSON_STORE);
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Unable to write to file: " + JSON_STORE);
-//        }
-//    }
+    // EFFECTS: saves the game to file
+    private void saveGame() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(bg);
+            jsonWriter.close();
+            System.out.println("Saved game to " + JSON_STORE + ".");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
 
     // MODIFIES: this
     // EFFECTS: loads game from file and automatically sets the last player as the dealer

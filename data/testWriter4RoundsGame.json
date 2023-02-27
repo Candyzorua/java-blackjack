@@ -1,0 +1,25 @@
+{
+    "numOfRounds": 0,
+    "players": [
+        {
+            "score": -100,
+            "name": "Jin"
+        },
+        {
+            "score": -200,
+            "name": "Timothy"
+        },
+        {
+            "score": 300,
+            "name": "Tracy"
+        },
+        {
+            "score": 0,
+            "name": "Oliver"
+        },
+        {
+            "score": 0,
+            "name": "Munn"
+        }
+    ]
+}
