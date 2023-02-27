@@ -31,7 +31,9 @@ public class JsonWriterTest extends JsonTest {
             bg.addPlayer(new Player("Timothy", -200));
             bg.addPlayer(new Player("Tracy", 300));
             bg.addPlayer(new Player("Oliver", 0));
-            bg.addPlayer(new Player("Munn", 0));
+            Player dealer = new Player("Munn", 0);
+            bg.addPlayer(dealer);
+            bg.setPlayerAsDealer(dealer);
             JsonWriter writer = new JsonWriter("./data/testWriter4RoundsGame.json");
             writer.open();
             writer.write(bg);
