@@ -27,18 +27,21 @@ public class GamePanel {
         runGamePanel();
     }
 
+    // MODIFIES: this
+    // EFFECTS: runs application
     private void runGamePanel() {
         boolean continueGame = true;
         System.out.println("Welcome to Java Blackjack!");
         shouldLoadGame();
         while (continueGame) {
-            configure(bg);
-            startNewRound(bg);
+            configure();
+            startNewRound();
             continueGame = shouldRoundContinue();
         }
         shouldSaveGame();
     }
 
+    // MODIFIES: this
     // EFFECTS: takes user input on whether previous game should be loaded and loads game if answer is yes
     private void shouldLoadGame() {
         System.out.println("Would you like to load a game?");
@@ -68,19 +71,19 @@ public class GamePanel {
         return "y".equals(continueRoundUserInput);
     }
 
-    // MODIFIES: BGame
+    // MODIFIES: this
     // EFFECTS: starts a new round of blackjack
-    private void startNewRound(BGame g1) {
+    private void startNewRound() {
         System.out.println("Starting a new round! Collecting wagers... \n");
-        Round r1 = g1.startRound();
+        Round r1 = bg.startRound();
         handleRound(r1);
     }
 
-    // MODIFIES: g1
+    // MODIFIES: this
     // EFFECTS: enters game configuration menu
-    private void configure(BGame g1) {
+    private void configure() {
         System.out.println("Entering configuration menu... \n");
-        configureGame(g1);
+        configureGame(bg);
         System.out.println("Exiting configuration menu... \n");
     }
 
@@ -105,6 +108,8 @@ public class GamePanel {
                 case "c":
                     keepConfiguring = false;
                     break;
+                default:
+                    System.out.println("Sorry, invalid input.");
             }
         }
     }
@@ -196,6 +201,7 @@ public class GamePanel {
 
     // MODIFIES: r1
     // EFFECTS: takes wagers of all players
+    //          if an invalid wager is given, the default wager of 1 is set for that player
     private void takeWagers(Round r1) {
         for (Player p : r1.getRegularPlayers()) {
             try {
@@ -306,6 +312,7 @@ public class GamePanel {
 
     // MODIFIES: this
     // EFFECTS: loads game from file and automatically sets the last player as the dealer
+    //          if loaded games has less than the min. amount of players, default players loaded
     private void loadGame() {
         try {
             bg = jsonReader.read();

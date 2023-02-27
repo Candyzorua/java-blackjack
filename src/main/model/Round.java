@@ -82,6 +82,7 @@ public class Round implements Playable {
                         break;
                     case BLACKJACK:
                         handleBlackjack(p);
+                        break;
                     default:
                         throw new InvalidRoundStatus();
                 }

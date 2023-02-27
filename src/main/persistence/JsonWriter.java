@@ -6,7 +6,10 @@ import org.json.JSONObject;
 
 import java.io.*;
 
-// Represents a writer that writes JSON representation of BGame to file
+/**
+ * A writer that writes JSON representation of BGame to file
+ */
+
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
