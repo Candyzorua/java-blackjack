@@ -198,8 +198,13 @@ public class GamePanel {
     // EFFECTS: takes wagers of all players
     private void takeWagers(Round r1) {
         for (Player p : r1.getRegularPlayers()) {
-            int wager = Integer.parseInt(takeInput("What is " + p.getName() + "'s wager?"));
-            p.setWager(wager);
+            try {
+                int wager = Integer.parseInt(takeInput("What is " + p.getName() + "'s wager?"));
+                p.setWager(wager);
+            } catch (IllegalArgumentException e) {
+                System.out.println("That's not a valid wager! Setting wager as 1...");
+                p.setWager(1);
+            }
         }
     }
 
