@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.NotEnoughPlayers;
 import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -306,12 +307,18 @@ public class GamePanel {
     private void loadGame() {
         try {
             bg = jsonReader.read();
+            if (bg.getNumPlayers() < BGame.MIN_PLAYERS) {
+                throw new NotEnoughPlayers();
+            }
             System.out.println("Loaded game from " + JSON_STORE + ".");
+            Player lastPlayer = bg.getRegularPlayers().get(bg.getNumPlayers() - 1);
+            bg.setPlayerAsDealer(lastPlayer);
+            System.out.println("The last player has been set as the dealer by default.");
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE + ".");
+        } catch (NotEnoughPlayers nep) {
+            System.out.println("Loaded game does not have enough players.");
+            System.out.println("Loading default players instead...");
         }
-        Player lastPlayer = bg.getRegularPlayers().get(bg.getNumPlayers() - 1);
-        bg.setPlayerAsDealer(lastPlayer);
-        System.out.println("The last player has been set as the dealer by default.");
     }
 }

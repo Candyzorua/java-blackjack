@@ -1,5 +1,9 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,12 +11,12 @@ import java.util.List;
  * A single game of Blackjack
  */
 
-public class BGame implements Playable {
+public class BGame implements Playable, Writable {
 
     private List<Player> regularPlayerList;
     private Player dealer;
     private int numOfRounds;
-    private static final int MIN_PLAYERS = 4;
+    public static final int MIN_PLAYERS = 4;
 
     // EFFECTS: constructs a new game of blackjack with an empty list of players
     public BGame() {
@@ -117,5 +121,24 @@ public class BGame implements Playable {
             dealer = new Player(player.getName(), player.getScore());
             return true;
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("numOfRounds", numOfRounds);
+        json.put("players", playersToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray playersToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Player p : regularPlayerList) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
     }
 }

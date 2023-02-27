@@ -2,24 +2,24 @@
   "players": [
     {
       "name": "Jin",
-      "score": "-100"
-    },
-    {
-      "name": "Timothy",
-      "score": "-200"
-    },
-    {
-      "name": "Tracy",
-      "score": "300"
-    },
-    {
-      "name": "Oliver",
       "score": "0"
     },
     {
-      "name": "Munn",
+      "name": "Mikayla",
+      "score": "0"
+    },
+    {
+      "name": "Victor",
+      "score": "0"
+    },
+    {
+      "name": "Leona",
+      "score": "0"
+    },
+    {
+      "name": "Amy",
       "score": "0"
     }
   ],
-  "numOfRounds": "4"
+  "numOfRounds": "0"
 }
