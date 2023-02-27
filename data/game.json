@@ -1,24 +1,24 @@
 {
-    "numOfRounds": "2",
+    "numOfRounds": "3",
     "players": [
         {
-            "score": "-7",
+            "score": "-4",
             "name": "Jin"
         },
         {
-            "score": "-7",
+            "score": "-11",
             "name": "Mikayla"
         },
         {
-            "score": "-7",
+            "score": "-12",
             "name": "Victor"
         },
         {
-            "score": "-7",
+            "score": "-4",
             "name": "Leona"
         },
         {
-            "score": "28",
+            "score": "31",
             "name": "Amy"
         }
     ]

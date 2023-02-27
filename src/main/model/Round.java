@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.InvalidRoundStatus;
+
 import java.util.List;
 
 import static model.RoundStatus.BLACKJACK;
@@ -31,7 +33,7 @@ public class Round implements Playable {
     // MODIFIES: this
     // EFFECTS: record all players' initial hand and updates their roundStatus if they get blackjack
     public void dealCardsToAllPlayers() {
-        for (Player p: regularPlayerList) {
+        for (Player p : regularPlayerList) {
             p.dealInitialCards(cd);
             if (p.getHandSize() == 21 | p.getHandSize() == 22) {
                 p.setStatus(BLACKJACK);
@@ -80,6 +82,8 @@ public class Round implements Playable {
                         break;
                     case BLACKJACK:
                         handleBlackjack(p);
+                    default:
+                        throw new InvalidRoundStatus();
                 }
             }
         }
@@ -95,7 +99,7 @@ public class Round implements Playable {
     // MODIFIES: this
     // EFFECTS: handle payout when a single player stands
     private void handleStand(Player p) {
-        if (dealer.getStatus() ==  BUST) {
+        if (dealer.getStatus() == BUST) {
             p.addScore(p.getWager());
             dealer.deductScore(p.getWager());
         } else if (p.getHandSize() > dealer.getHandSize()) {

@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.InvalidRoundStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -241,6 +242,21 @@ public class RoundTest {
         assertEquals(0, p2.getScore());
         assertEquals(-14, p3.getScore());
         assertEquals(14, d1.getScore());
+    }
+
+    @Test
+    public void testThrowInvalidRoundStatus() {
+        p2.setWager(3);
+        h2.addCard(c2);
+        h2.addCard(c2);
+        p2.setHand(h2);
+        p2.setStatus(RoundStatus.PENDING);
+        try {
+            r1.handlePayouts();
+            fail("InvalidRoundStatus should have been thrown");
+        } catch (InvalidRoundStatus irs) {
+            // pass
+        }
     }
 }
 
