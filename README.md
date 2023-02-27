@@ -33,16 +33,16 @@ menu, or save and quit to the title screen.
 ## Phase 1 User Stories
 
 ### Player Configuration Menu
-- *As a user, I want to be able to add or delete players.
-- *As a user, I want to be able to designate a player as the dealer. If there is already a dealer, and I designate a non-dealer player as the dealer then the dealer becomes a non-dealer player.
-- *As a user, I want to be able to see all player names and scores.
+- As a user, I want to be able to add or delete players.
+- As a user, I want to be able to designate a player as the dealer. If there is already a dealer, and I designate a non-dealer player as the dealer then the dealer becomes a non-dealer player.
+- As a user, I want to be able to see all player names and scores.
 
 ### Gameplay Screen
-- *As a user, I want to be able to record the wager for every player at the start of every round.
-- *As a user, I want to be randomly dealt two cards at the start of every round from a deck, just like in standard Blackjack.
-- *As a user, I want to be able to "hit" or "stand", after being dealt cards.
-- *As a user, I want to be able to see the status of every player at any moment in the round, be it "bust", "stand", or "pending", their current wager, and also their current score.
-- *As a user, at the end of every round, I want to be displayed a summary of player scores, and to be given the option to quit to title screen, or to enter the player configuration menu before playing a new round.
+- As a user, I want to be able to record the wager for every player at the start of every round.
+- As a user, I want to be randomly dealt two cards at the start of every round from a deck, just like in standard Blackjack.
+- As a user, I want to be able to "hit" or "stand", after being dealt cards.
+- As a user, I want to be able to see the status of every player at any moment in the round, be it "bust", "stand", or "pending", their current wager, and also their current score.
+- As a user, at the end of every round, I want to be displayed a summary of player scores, and to be given the option to quit to title screen, or to enter the player configuration menu before playing a new round.
 
 ## Phase 2 User Stories
 
@@ -54,3 +54,6 @@ menu, or save and quit to the title screen.
     - Continue to the next round
 
 - As a user, when starting up a new game, I want to be able to load a game from previous save file or start a fresh game.
+
+## Citations
+- Data persistence mechanism modeled after JsonSerializationDemo https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
