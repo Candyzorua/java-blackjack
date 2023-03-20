@@ -80,6 +80,28 @@ public class BGame implements Playable, Writable {
         return new Round(numOfRounds, regularPlayerList, dealer);
     }
 
+    // getters
+
+    @Override
+    public List<Player> getRegularPlayers() {
+        return regularPlayerList;
+    }
+
+    public int getNumPlayers() {
+        return regularPlayerList.size();
+    }
+
+    @Override
+    public Player getDealer() {
+        return dealer;
+    }
+
+    public int getNumOfRounds() {
+        return numOfRounds;
+    }
+
+    // setters
+
     // MODIFIES: this
     // EFFECTS: sets a regular player as dealer
     //          the existing dealer becomes a regular player
@@ -101,7 +123,6 @@ public class BGame implements Playable, Writable {
         }
     }
 
-    // EFFECTS: returns BGame data as a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -119,25 +140,5 @@ public class BGame implements Playable, Writable {
         }
         jsonArray.put(dealer.toJson());
         return jsonArray;
-    }
-
-    // getters
-
-    @Override
-    public List<Player> getRegularPlayers() {
-        return regularPlayerList;
-    }
-
-    public int getNumPlayers() {
-        return regularPlayerList.size();
-    }
-
-    @Override
-    public Player getDealer() {
-        return dealer;
-    }
-
-    public int getNumOfRounds() {
-        return numOfRounds;
     }
 }
