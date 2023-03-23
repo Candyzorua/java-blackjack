@@ -32,7 +32,7 @@ public class BGame implements Playable, Writable {
 
     // MODIFIES: this
     // EFFECTS: adds a given player to the game
-    //          fails if given player has the same name with another player or the dealer
+    //          fails if given player has the same name with another player
     //          return true if success, false if failure
     public boolean addPlayer(Player player) {
         if (isPlayerWithNameIn(player.getName())) {
@@ -65,6 +65,17 @@ public class BGame implements Playable, Writable {
             }
         }
         return false;
+    }
+
+    // EFFECTS: returns a regular player with the given name from the list of regular players
+    //          returns null if no player with the given name from the list of regular players
+    public Player selectPlayer(String playerName) {
+        for (Player p : regularPlayerList) {
+            if (p.getName().equals(playerName)) {
+                return p;
+            }
+        }
+        return null;
     }
 
     // MODIFIES: this
