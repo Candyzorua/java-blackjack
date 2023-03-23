@@ -7,6 +7,10 @@ import persistence.JsonReader;
 
 import java.io.IOException;
 
+/**
+ * Handles loading of game
+ */
+
 public class GameLoader {
     private final JsonReader jsonReader;
     private static final String JSON_STORE = "./data/game.json";
