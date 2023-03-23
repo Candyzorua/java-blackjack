@@ -15,6 +15,7 @@ public class GameLoader {
     private final JsonReader jsonReader;
     private static final String JSON_STORE = "./data/game.json";
 
+    // EFFECTS: constructs GameLoader with storage location JSON_STORE
     public GameLoader() {
         jsonReader = new JsonReader(JSON_STORE);
     }

@@ -54,6 +54,7 @@ public class GamePanel {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: takes user input on whether the game should be saved and saves game if answer is yes
     private void shouldSaveGame() {
         System.out.println("Would you like to save this game?");

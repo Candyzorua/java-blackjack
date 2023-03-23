@@ -13,6 +13,7 @@ public class GameSaver {
     private static final String JSON_STORE = "./data/game.json";
     private final JsonWriter jsonWriter;
 
+    // EFFECTS: constructs GameSaver with storage location JSON_STORE
     public GameSaver() {
         jsonWriter = new JsonWriter(JSON_STORE);
     }

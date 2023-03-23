@@ -5,9 +5,14 @@ import model.Player;
 
 import static ui.InputTaker.takeInput;
 
+/**
+ * Handles actions related to the player configuration menu
+ */
+
 public class PlayerConfigurator {
     private final BGame bg;
 
+    // EFFECTS: constructs a PlayerConfigurator for the given BGame
     public PlayerConfigurator(BGame bg) {
         this.bg = bg;
     }
@@ -20,7 +25,7 @@ public class PlayerConfigurator {
         System.out.println("Exiting configuration menu... \n");
     }
 
-    // MODIFIES: g1
+    // MODIFIES: this
     // EFFECTS: handles actions related to game configuration
     private void configureGame() {
         boolean keepConfiguring = true;
@@ -47,7 +52,7 @@ public class PlayerConfigurator {
         }
     }
 
-    // MODIFIES: g1
+    // MODIFIES: this
     // EFFECTS: tries to add a player to the game
     //          fails if player with the same name is already in the game
     //          prints appropriate confirmation messages (fail or succeed)
@@ -61,7 +66,7 @@ public class PlayerConfigurator {
         }
     }
 
-    // MODIFIES: g1
+    // MODIFIES: this
     // EFFECTS: tries to remove a player from the game
     //          fails if the number of players <= g1.MIN_PLAYERS
     //          prints appropriate confirmation messages (fail or succeed)
@@ -77,7 +82,7 @@ public class PlayerConfigurator {
         }
     }
 
-    // MODIFIES: g1
+    // MODIFIES: this
     // EFFECTS: lets the user set a new regular player as the dealer by name, and the old dealer becomes
     //          a regular player
     //          fails if the player gives an invalid name

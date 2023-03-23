@@ -9,11 +9,15 @@ import static ui.InputTaker.takeInput;
 import static ui.SummaryPrinter.displayPlayerSummaryRound;
 import static ui.SummaryPrinter.displayRoundSummary;
 
+/**
+ * Handles all UI actions relating to a single round
+ */
+
 public class RoundManager {
     private Round round;
     private final BGame bg;
 
-
+    // EFFECTS: constructs a RoundManager with a given BGame and no round
     public RoundManager(BGame bg) {
         this.bg = bg;
         round = null;
@@ -80,7 +84,7 @@ public class RoundManager {
         }
     }
 
-    // MODIFIES: r1
+    // MODIFIES: this
     // EFFECTS: take round status of all players
     private void takeStatuses() {
         for (Player p : round.getRegularPlayers()) {
