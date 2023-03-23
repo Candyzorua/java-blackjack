@@ -2,7 +2,6 @@ package persistence;
 
 import model.BGame;
 import model.Player;
-import model.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
