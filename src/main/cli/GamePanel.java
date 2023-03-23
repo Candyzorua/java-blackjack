@@ -1,29 +1,29 @@
-package ui;
+package cli;
 
 import model.*;
 
 import java.io.FileNotFoundException;
 
-import static ui.InputTaker.takeInput;
+import static cli.InputTaker.takeInput;
 
 /**
  * Main CLI for this program
  */
 
 public class GamePanel {
-    private final BGame bg;
+    private BGame bg;
     private final GameLoader gameLoader;
     private final GameSaver gameSaver;
-    private final RoundManager roundManager;
-    private final PlayerConfigurator playerConfigurator;
+    private RoundManager roundManager;
+    private PlayerConfigurator playerConfigurator;
 
     // EFFECTS: constructs GamePanel and runs application
     public GamePanel() throws FileNotFoundException {
-        bg = new BGame();
         gameLoader = new GameLoader();
         gameSaver = new GameSaver();
-        roundManager = new RoundManager(bg);
-        playerConfigurator = new PlayerConfigurator(bg);
+        playerConfigurator = null;
+        roundManager = null;
+        bg = null;
         runGamePanel();
     }
 
@@ -32,7 +32,9 @@ public class GamePanel {
     private void runGamePanel() {
         boolean continueGame = true;
         System.out.println("Welcome to Java Blackjack!");
-        shouldLoadGame();
+        bg = shouldLoadGame();
+        playerConfigurator = new PlayerConfigurator(bg);
+        roundManager = new RoundManager(bg);
         while (continueGame) {
             playerConfigurator.configure();
             roundManager.startNewRound();
@@ -43,15 +45,17 @@ public class GamePanel {
 
     // MODIFIES: this
     // EFFECTS: takes user input on whether previous game should be loaded and loads game if answer is yes
-    private void shouldLoadGame() {
+    //          returns loaded game
+    private BGame shouldLoadGame() {
         System.out.println("Would you like to load a game?");
         String continueRoundUserInput = takeInput("Type 'y' for yes, and any other key for no.");
         if ("y".equals(continueRoundUserInput)) {
-            gameLoader.loadGame(bg);
+            bg = gameLoader.loadGame();
         } else {
             System.out.println("Starting on a clean slate!");
-            gameLoader.loadDefaultPlayers(bg);
+            bg = gameLoader.loadDefaultPlayers(bg);
         }
+        return bg;
     }
 
     // MODIFIES: this

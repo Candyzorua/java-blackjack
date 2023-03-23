@@ -1,13 +1,13 @@
-package ui;
+package cli;
 
 import model.BGame;
 import model.Player;
 import model.Round;
 import model.RoundStatus;
 
-import static ui.InputTaker.takeInput;
-import static ui.SummaryPrinter.displayPlayerSummaryRound;
-import static ui.SummaryPrinter.displayRoundSummary;
+import static cli.InputTaker.takeInput;
+import static cli.SummaryPrinter.displayPlayerSummaryRound;
+import static cli.SummaryPrinter.displayRoundSummary;
 
 /**
  * Handles all UI actions relating to a single round

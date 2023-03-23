@@ -1,9 +1,9 @@
-package ui;
+package cli;
 
 import model.BGame;
 import model.Player;
 
-import static ui.InputTaker.takeInput;
+import static cli.InputTaker.takeInput;
 
 /**
  * Handles actions related to the player configuration menu

@@ -1,4 +1,4 @@
-package ui;
+package cli;
 
 import model.BGame;
 import model.Player;
