@@ -1,5 +1,6 @@
-package gui.configmenu;
+package gui.configmenu.tools;
 
+import gui.configmenu.ConfigMenu;
 import model.BGame;
 import model.Player;
 
@@ -14,13 +15,13 @@ public class ChangeDealerTool extends MenuTool {
     }
 
     @Override
-    protected void createButton(JComponent parent) {
+    public void createButton(JComponent parent) {
         button = new JButton("Change to dealer");
         addToParent(parent);
     }
 
     @Override
-    protected void addListener() {
+    public void addListener() {
         button.addActionListener(new ChangeDealerTool.ClickHandler());
     }
 

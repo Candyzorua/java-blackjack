@@ -1,5 +1,7 @@
-package gui.configmenu;
+package gui.configmenu.tools;
 
+import gui.configmenu.ConfigMenu;
+import gui.configmenu.PlayerSelector;
 import model.BGame;
 
 import javax.swing.*;
@@ -19,11 +21,11 @@ public abstract class MenuTool {
 
     // MODIFIES: this
     // EFFECTS: creates button for tool
-    protected abstract void createButton(JComponent parent);
+    public abstract void createButton(JComponent parent);
 
     // MODIFIES: this
     // EFFECTS: adds a listener for this tool
-    protected abstract void addListener();
+    public abstract void addListener();
 
     // MODIFIES: parent
     // EFFECTS:  adds the given button to the parent component

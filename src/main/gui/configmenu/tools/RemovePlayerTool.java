@@ -1,5 +1,7 @@
-package gui.configmenu;
+package gui.configmenu.tools;
 
+import gui.configmenu.ConfigMenu;
+import gui.configmenu.tools.MenuTool;
 import model.BGame;
 import model.Player;
 
@@ -14,13 +16,13 @@ public class RemovePlayerTool extends MenuTool {
     }
 
     @Override
-    protected void createButton(JComponent parent) {
+    public void createButton(JComponent parent) {
         button = new JButton("Remove this player");
         addToParent(parent);
     }
 
     @Override
-    protected void addListener() {
+    public void addListener() {
         button.addActionListener(new ClickHandler());
     }
 
