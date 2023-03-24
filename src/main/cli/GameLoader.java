@@ -38,14 +38,15 @@ public class GameLoader {
         } catch (NotEnoughPlayers nep) {
             System.out.println("Loaded game does not have enough players.");
             System.out.println("Loading default players instead...");
-            loadDefaultPlayers(bg);
+            loadDefaultPlayers();
         }
         return bg;
     }
 
     // MODIFIES: bg
     // EFFECTS: loads the default players into the game
-    public BGame loadDefaultPlayers(BGame bg) {
+    public BGame loadDefaultPlayers() {
+        BGame bg = new BGame();
         Player p1 = new Player("Jin", 0);
         Player p2 = new Player("Mikayla", 0);
         Player p3 = new Player("Victor", 0);

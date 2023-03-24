@@ -11,7 +11,7 @@ public class PlayerSelector extends JComboBox<String> implements Populatable {
 
     public PlayerSelector() {
         super();
-        model = new DefaultComboBoxModel<String>();
+        model = new DefaultComboBoxModel<>();
         this.setModel(model);
         this.setBounds(50, 100, 90, 20);
     }
@@ -35,17 +35,5 @@ public class PlayerSelector extends JComboBox<String> implements Populatable {
     //EFFECTS: clears table
     private void clearPlayers() {
         model.removeAllElements();
-    }
-
-    public static void main(String[] args) {
-        PlayerSelector p = new PlayerSelector();
-        JScrollPane jp = new JScrollPane(p);
-        JFrame frame = new JFrame();
-        frame.setSize(300, 300);
-        frame.add(jp);
-        frame.setVisible(true);
-        List<Player> players1 = new ArrayList<>();
-        players1.add(new Player("Jin", 1));
-        p.repopulate(players1);
     }
 }

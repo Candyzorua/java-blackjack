@@ -29,6 +29,17 @@ public class Round implements Playable {
         dealCardsToAllPlayers();
     }
 
+    // REQUIRES: wagers.size() must be equal to the number of REGULAR players
+    // EFFECTS: sets the wages of all players
+    //          order of wages in list is preserved when assigning
+    public void setWagersForAllPlayers(List<Integer> wagers) {
+        for (int i = 0; i < wagers.size(); i++) {
+            Player player = regularPlayerList.get(i);
+            Integer wager = wagers.get(i);
+            player.setWager(wager);
+        }
+    }
+
     // REQUIRES: all players' hands must be empty
     // MODIFIES: this
     // EFFECTS: record all players' initial hand and updates their roundStatus if they get blackjack
@@ -127,6 +138,31 @@ public class Round implements Playable {
     @Override
     public Player getDealer() {
         return dealer;
+    }
+
+    @Override
+    public boolean addPlayer(Player player) {
+        return false;
+    }
+
+    @Override
+    public boolean removePlayer(Player player) {
+        return false;
+    }
+
+    @Override
+    public Player selectPlayer(String name) {
+        return null;
+    }
+
+    @Override
+    public boolean setPlayerAsDealer(Player toSetAsDealer) {
+        return false;
+    }
+
+    @Override
+    public Round startRound() {
+        return null;
     }
 
     @Override

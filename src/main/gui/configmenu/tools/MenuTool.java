@@ -1,19 +1,20 @@
 package gui.configmenu.tools;
 
-import gui.configmenu.ConfigMenu;
+import gui.configmenu.PlayerConfigMenu;
+import gui.configmenu.PlayerStatsPanel;
 import gui.configmenu.PlayerSelector;
-import model.BGame;
+import model.Playable;
 
 import javax.swing.*;
 
 public abstract class MenuTool {
-    protected final BGame bg;
-    protected final ConfigMenu cm;
+    protected final Playable playable;
+    protected final PlayerConfigMenu cm;
     protected final PlayerSelector ps;
     protected JButton button;
 
-    public MenuTool(BGame bg, ConfigMenu cm) {
-        this.bg = bg;
+    public MenuTool(Playable playable, PlayerConfigMenu cm) {
+        this.playable = playable;
         this.cm = cm;
         this.ps = cm.getPlayerSelector();
         button = null;

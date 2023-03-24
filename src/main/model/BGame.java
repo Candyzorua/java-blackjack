@@ -13,9 +13,10 @@ import java.util.List;
 
 public class BGame implements Playable, Writable {
 
-    private List<Player> regularPlayerList;
+    private final List<Player> regularPlayerList;
     private Player dealer;
     private int numOfRounds;
+    private Round currentRound;
     public static final int MIN_PLAYERS = 4;
 
     // EFFECTS: constructs a new game of blackjack with an empty list of players
@@ -88,7 +89,9 @@ public class BGame implements Playable, Writable {
             p.resetPlayer();
         }
         dealer.resetPlayer();
-        return new Round(numOfRounds, regularPlayerList, dealer);
+        Round round =  new Round(numOfRounds, regularPlayerList, dealer);
+        this.currentRound = round;
+        return round;
     }
 
     // getters
@@ -109,6 +112,10 @@ public class BGame implements Playable, Writable {
 
     public int getNumOfRounds() {
         return numOfRounds;
+    }
+
+    public Round getCurrentRound() {
+        return currentRound;
     }
 
     // setters

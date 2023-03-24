@@ -53,7 +53,7 @@ public class GamePanel {
             bg = gameLoader.loadGame();
         } else {
             System.out.println("Starting on a clean slate!");
-            bg = gameLoader.loadDefaultPlayers(bg);
+            bg = gameLoader.loadDefaultPlayers();
         }
         return bg;
     }
