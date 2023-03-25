@@ -64,7 +64,7 @@ public class BGameUI extends JPanel {
     }
 
     public void initializeClosingPanel() {
-        ClosingPanel closingPanel = new ClosingPanel(bg.getCurrentRound(), this);
+        ClosingPanel closingPanel = new ClosingPanel(bg, this);
         this.add("ClosingPanel", closingPanel);
         cardLayout.show(this, "ClosingPanel");
     }

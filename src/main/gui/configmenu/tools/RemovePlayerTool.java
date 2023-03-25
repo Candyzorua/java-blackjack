@@ -1,6 +1,7 @@
 package gui.configmenu.tools;
 
 import gui.configmenu.PlayerConfigMenu;
+import model.BGame;
 import model.Playable;
 import model.Player;
 
@@ -10,8 +11,8 @@ import java.awt.event.ActionListener;
 
 public class RemovePlayerTool extends MenuTool {
 
-    public RemovePlayerTool(Playable playable, PlayerConfigMenu cm) {
-        super(playable, cm);
+    public RemovePlayerTool(BGame bg, PlayerConfigMenu cm) {
+        super(bg, cm);
     }
 
     @Override
@@ -32,13 +33,13 @@ public class RemovePlayerTool extends MenuTool {
         @Override
         public void actionPerformed(ActionEvent e) {
             String name = getSelectedPlayerName();
-            Player toRemove = playable.selectPlayer(name);
-            if (!playable.removePlayer(toRemove)) {
+            Player toRemove = bg.selectPlayer(name);
+            if (!bg.removePlayer(toRemove)) {
                 System.out.println("Sorry, unable to remove that player.");
             } else {
                 System.out.println("Player successfully removed.");
             }
-            cm.refreshPlayers(playable.getRegularPlayers(), playable.getDealer());
+            cm.refreshPlayers(bg.getRegularPlayers(), bg.getDealer());
         }
     }
 }

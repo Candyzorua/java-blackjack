@@ -20,7 +20,7 @@ public class PlayerConfigMenu extends PlayerStatsPanel {
     // EFFECTS: sets up a player configuration menu
     //          that displays stats of players, dealer
     //          has functionality to add, remove players, and set new player as dealer
-    public PlayerConfigMenu(Playable bg, BGameUI gui) {
+    public PlayerConfigMenu(BGame bg, BGameUI gui) {
         super(bg);
         this.gui = gui;
         this.setUpConfigOptions();
@@ -31,21 +31,21 @@ public class PlayerConfigMenu extends PlayerStatsPanel {
     private void setUpConfigOptions() {
         this.add(new JScrollPane(playerSelector));
 
-        MenuTool rmt = new RemovePlayerTool(playable, this);
+        MenuTool rmt = new RemovePlayerTool(bg, this);
         rmt.createButton(this);
         rmt.addListener();
 
-        MenuTool cdt = new ChangeDealerTool(playable, this);
+        MenuTool cdt = new ChangeDealerTool(bg, this);
         cdt.createButton(this);
         cdt.addListener();
 
-        AddPlayerTool apt = new AddPlayerTool(playable, this);
+        AddPlayerTool apt = new AddPlayerTool(bg, this);
         apt.createButton(this);
         apt.createTextField(this);
         apt.addListener();
 
         JButton continueButton = new JButton("Continue");
-        continueButton.addActionListener(new PlayerConfigMenu.ClickHandler());
+        continueButton.addActionListener(new ClickHandler());
         this.add(continueButton);
     }
 

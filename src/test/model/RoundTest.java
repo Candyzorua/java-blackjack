@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -257,6 +258,15 @@ public class RoundTest {
         } catch (InvalidRoundStatus irs) {
             // pass
         }
+    }
+
+    @Test
+    public void testSetWagersForAll() {
+        Integer[] wagers = new Integer[]{1, 2};
+        List<Integer> wagerList = Arrays.asList(wagers);
+        r1.setWagersForAllPlayers(wagerList);
+        assertEquals(1, p2.getWager());
+        assertEquals(2, p3.getWager());
     }
 }
 

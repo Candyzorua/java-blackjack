@@ -1,33 +1,29 @@
 {
-    "numOfRounds": "3",
+    "numOfRounds": "1",
     "players": [
         {
-            "score": "-8",
+            "score": "-26",
             "name": "Jin"
         },
         {
-            "score": "-28",
+            "score": "-26",
             "name": "Mikayla"
         },
         {
-            "score": "46",
-            "name": "Victor"
-        },
-        {
-            "score": "-22",
+            "score": "-26",
             "name": "Leona"
         },
         {
             "score": "-26",
-            "name": "Tim"
-        },
-        {
-            "score": "-118",
             "name": "Amy"
         },
         {
-            "score": "156",
-            "name": "Jasmine"
+            "score": "-26",
+            "name": "Victor"
+        },
+        {
+            "score": "130",
+            "name": "Dan"
         }
     ]
 }

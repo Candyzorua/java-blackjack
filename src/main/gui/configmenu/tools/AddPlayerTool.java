@@ -2,6 +2,7 @@ package gui.configmenu.tools;
 
 import gui.configmenu.PlayerConfigMenu;
 import gui.configmenu.PlayerStatsPanel;
+import model.BGame;
 import model.Playable;
 import model.Player;
 
@@ -12,8 +13,8 @@ import java.awt.event.ActionListener;
 public class AddPlayerTool extends MenuTool {
     private JTextField jtf;
 
-    public AddPlayerTool(Playable playable, PlayerConfigMenu cm) {
-        super(playable, cm);
+    public AddPlayerTool(BGame bg, PlayerConfigMenu cm) {
+        super(bg, cm);
     }
 
     @Override
@@ -40,12 +41,12 @@ public class AddPlayerTool extends MenuTool {
         @Override
         public void actionPerformed(ActionEvent e) {
             String name = jtf.getText();
-            if (!playable.addPlayer(new Player(name, 0))) {
+            if (!bg.addPlayer(new Player(name, 0))) {
                 System.out.println("Sorry, a player with that name already exists.");
             } else {
                 System.out.println("Player successfully added.");
             }
-            cm.refreshPlayers(playable.getRegularPlayers(), playable.getDealer());
+            cm.refreshPlayers(bg.getRegularPlayers(), bg.getDealer());
         }
     }
 }

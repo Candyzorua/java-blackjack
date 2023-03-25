@@ -2,6 +2,7 @@ package gui.configmenu.tools;
 
 import gui.configmenu.PlayerConfigMenu;
 import gui.configmenu.PlayerStatsPanel;
+import model.BGame;
 import model.Playable;
 import model.Player;
 
@@ -11,8 +12,8 @@ import java.awt.event.ActionListener;
 
 public class ChangeDealerTool extends MenuTool {
 
-    public ChangeDealerTool(Playable playable, PlayerConfigMenu cm) {
-        super(playable, cm);
+    public ChangeDealerTool(BGame bg, PlayerConfigMenu cm) {
+        super(bg, cm);
     }
 
     @Override
@@ -33,13 +34,13 @@ public class ChangeDealerTool extends MenuTool {
         @Override
         public void actionPerformed(ActionEvent e) {
             String name = getSelectedPlayerName();
-            Player toSetAsDealer = playable.selectPlayer(name);
-            if (!playable.setPlayerAsDealer(toSetAsDealer)) {
+            Player toSetAsDealer = bg.selectPlayer(name);
+            if (!bg.setPlayerAsDealer(toSetAsDealer)) {
                 System.out.println("Sorry, unable to set that player as the dealer.");
             } else {
                 System.out.println("Player successfully set as dealer.");
             }
-            cm.refreshPlayers(playable.getRegularPlayers(), playable.getDealer());
+            cm.refreshPlayers(bg.getRegularPlayers(), bg.getDealer());
         }
     }
 }

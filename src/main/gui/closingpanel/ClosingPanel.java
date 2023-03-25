@@ -2,6 +2,7 @@ package gui.closingpanel;
 
 import gui.BGameUI;
 import gui.configmenu.PlayerStatsPanel;
+import model.BGame;
 import model.Round;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ public class ClosingPanel extends JPanel implements ActionListener {
     private final JButton quitButton;
     private final BGameUI gui;
 
-    public ClosingPanel(Round round, BGameUI gui) {
+    public ClosingPanel(BGame bg, BGameUI gui) {
         this.gui = gui;
 
         saveButton = new JButton("Save game");
@@ -22,7 +23,7 @@ public class ClosingPanel extends JPanel implements ActionListener {
         quitButton.addActionListener(this);
         this.add(saveButton);
         this.add(quitButton);
-        setRoundAndResultsPanel(round);
+        setRoundAndResultsPanel(bg);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -33,9 +34,9 @@ public class ClosingPanel extends JPanel implements ActionListener {
         }
     }
 
-    public void setRoundAndResultsPanel(Round round) {
-        PlayerStatsPanel resultsPanel = new PlayerStatsPanel(round);
-        resultsPanel.refreshPlayers(round.getRegularPlayers(), round.getDealer());
+    public void setRoundAndResultsPanel(BGame bg) {
+        PlayerStatsPanel resultsPanel = new PlayerStatsPanel(bg);
+        resultsPanel.refreshPlayers(bg.getRegularPlayers(), bg.getDealer());
         this.add(resultsPanel);
     }
 }

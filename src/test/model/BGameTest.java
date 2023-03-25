@@ -114,4 +114,20 @@ public class BGameTest {
         assertEquals("Amy", round.getDealer().getName());
         assertEquals(1, g1.getNumOfRounds());
     }
+
+    @Test
+    public void testSelectPlayerSuccess() {
+        g1.addPlayer(p1);
+        g1.addPlayer(p2);
+        Player result = g1.selectPlayer("Amy");
+        assertEquals(result, p1);
+    }
+
+    @Test
+    public void testSelectPlayerFail() {
+        g1.addPlayer(p1);
+        g1.addPlayer(p2);
+        Player result = g1.selectPlayer("Jacky");
+        assertNull(result);
+    }
 }

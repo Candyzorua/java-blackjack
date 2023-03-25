@@ -141,31 +141,6 @@ public class Round implements Playable {
     }
 
     @Override
-    public boolean addPlayer(Player player) {
-        return false;
-    }
-
-    @Override
-    public boolean removePlayer(Player player) {
-        return false;
-    }
-
-    @Override
-    public Player selectPlayer(String name) {
-        return null;
-    }
-
-    @Override
-    public boolean setPlayerAsDealer(Player toSetAsDealer) {
-        return false;
-    }
-
-    @Override
-    public Round startRound() {
-        return null;
-    }
-
-    @Override
     public List<Player> getRegularPlayers() {
         return regularPlayerList;
     }

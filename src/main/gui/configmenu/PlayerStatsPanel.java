@@ -1,5 +1,6 @@
 package gui.configmenu;
 
+import model.BGame;
 import model.Playable;
 import model.Player;
 
@@ -10,20 +11,20 @@ import java.util.List;
 public class PlayerStatsPanel extends JPanel {
     private static final int WIDTH = 400;
     private static final int HEIGHT = 400;
-    protected final Playable playable;
+    protected final BGame bg;
     protected final PlayerTable playerTable;
     protected final PlayerTable dealerTable;
     protected final PlayerSelector playerSelector;
 
-    public PlayerStatsPanel(Playable playable) {
-        this.playable = playable;
+    public PlayerStatsPanel(BGame bg) {
+        this.bg = bg;
         playerTable = new PlayerTable();
         dealerTable = new PlayerTable();
         playerSelector = new PlayerSelector();
         this.add(new JScrollPane(playerTable));
         this.add(new JScrollPane(dealerTable));
         this.setSize(WIDTH, HEIGHT);
-        this.refreshPlayers(playable.getRegularPlayers(), playable.getDealer());
+        this.refreshPlayers(bg.getRegularPlayers(), bg.getDealer());
     }
 
     // MODIFIES: this
