@@ -54,3 +54,34 @@ menu, or save and quit to the title screen.
     - Continue to the next round
 
 - As a user, when starting up a new game, I want to be able to load a game from previous save file or start a fresh game.
+
+## Phase 3 Notes
+
+### GUI Implementation
+- All functionality preserved from Phase 2 except ability to continue to next round after finishing a round (only given option to save game and quit game)
+
+### Instructions for Grader
+- You can generate the first required action related to adding Xs to a Y by...
+    - The first required action is adding a new player to the game.
+    - Starting from the opening panel, click "Start new game" or "Load previous game".
+    - Type the name of the new player. Click "Add player".
+    
+- You can generate the second required action related to adding Xs to a Y by...
+    - The second required action is letting a player hit during a round of Blackjack.
+    - Starting from the opening panel, click "Start new game" or "Load previous game".
+    - Configure players, then click "Continue".
+    - Toggle wagers, then click "Done". 
+    - The current player is the panel that is white in color. Click "Hit" to deal a card to that player.
+    
+- You can locate my visual component by...
+    - The opening panel has an image of the logo.
+    
+- You can save the state of my application by...
+    - Starting from the opening panel, click "Start new game" or "Load previous game".
+    - Configure players, then click "Continue".
+    - Toggle wagers, then click "Done". 
+    - Press "Hit" or "Stand" until all players have finished their turn and the round ends.
+    - Press "Save".
+    
+- You can reload the state of my application by...
+    - Starting from the opening panel, click "Load previous game".
