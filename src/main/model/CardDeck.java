@@ -9,12 +9,12 @@ import java.util.List;
  */
 
 public class CardDeck {
-    private List<Card> contents;
+    private final List<Card> contents;
 
     // EFFECTS: constructs a standard deck of cards with 52 cards
     public CardDeck() {
         contents = new ArrayList<>();
-        String[] suits = {"spades", "hearts", "clubs", "diamonds"};
+        String[] suits = {"♠️", "❤️", "♣️", "♦️"};
         String[] labels = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
         int[] values = {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11};
         for (String s : suits) {
