@@ -11,11 +11,17 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Opening panel of the game
+ */
+
 public class OpeningPanel extends JPanel implements ActionListener {
     private final JButton startNewGame;
     private final JButton loadGame;
     private final BGameUI gui;
 
+    // EFFECTS: constructs an opening panel which lets player load game or start anew
+    //          displays an image of the game logo
     public OpeningPanel(BGameUI gui) {
         this.gui = gui;
         this.setLayout(new FlowLayout());
@@ -35,6 +41,7 @@ public class OpeningPanel extends JPanel implements ActionListener {
         this.add(loadGame);
     }
 
+    // EFFECTS: initialises a new game or loads a previous game depending on which button clicked
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startNewGame) {

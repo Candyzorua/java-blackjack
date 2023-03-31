@@ -9,6 +9,10 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Panel for players to input their wages
+ */
+
 public class WagerTaker extends JPanel {
     private static final int WIDTH = 200;
     private static final int HEIGHT = 200;
@@ -16,6 +20,7 @@ public class WagerTaker extends JPanel {
     private final BGame bg;
     private final BGameUI gui;
 
+    // EFFECTS: constructs a panel for wager taking with given BGame and BGameUI
     public WagerTaker(BGame bg, BGameUI gui) {
         this.bg = bg;
         this.gui = gui;

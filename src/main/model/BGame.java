@@ -134,6 +134,7 @@ public class BGame implements Playable, Writable {
         }
     }
 
+    // EFFECTS: converts the BGame to a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

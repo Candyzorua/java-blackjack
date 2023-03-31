@@ -6,6 +6,10 @@ import model.BGame;
 
 import javax.swing.*;
 
+/**
+ * Tool to be used in the player configuration menu
+ */
+
 public abstract class MenuTool {
     protected final BGame bg;
     protected final PlayerConfigMenu cm;

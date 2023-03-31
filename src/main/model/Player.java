@@ -108,6 +108,7 @@ public class Player implements Writable {
         this.wager = wager;
     }
 
+    // EFFECTS: converts the player into a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

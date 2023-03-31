@@ -4,6 +4,9 @@ import model.BGame;
 
 import javax.swing.*;
 
+/**
+ * Template for a tool for the game
+ */
 public abstract class GameTool {
     protected final BGame bg;
     protected JButton button;

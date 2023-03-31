@@ -4,11 +4,17 @@ import model.Player;
 
 import javax.swing.*;
 
+/**
+ * A panel for the round dealer
+ */
+
 public class DealerPanel extends PlayerPanel {
     public DealerPanel(Player player) {
         super(player);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds panel text relevant to the dealer
     @Override
     public void addLabels() {
         JLabel dealerLabel = new JLabel("DEALER");

@@ -4,11 +4,17 @@ import model.Player;
 
 import javax.swing.*;
 
+/**
+ * A panel for a regular (non-dealer) player
+ */
+
 public class RegularPlayerPanel extends PlayerPanel {
     public RegularPlayerPanel(Player player) {
         super(player);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds panel text relevant to the player
     public void addLabels() {
         JLabel nameLabel = new JLabel("NAME: " +  player.getName());
         JLabel scoreLabel = new JLabel("SCORE: " + player.getScore());

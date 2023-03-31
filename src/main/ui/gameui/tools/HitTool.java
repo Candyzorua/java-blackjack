@@ -11,6 +11,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Tool that lets players hit
+ */
+
 public class HitTool extends RoundTool {
 
     public HitTool(Round round, Player player, PlayerPanel playerPanel, RoundUI roundUI) {

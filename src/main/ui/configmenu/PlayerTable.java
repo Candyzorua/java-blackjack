@@ -17,7 +17,7 @@ public class PlayerTable extends JTable implements Populatable {
     public static final int WIDTH = 100;
     public static final int HEIGHT = 100;
 
-    // EFFECTS:
+    // EFFECTS: sets the table model and size
     public PlayerTable() {
         super();
         model = new DefaultTableModel(data, column);

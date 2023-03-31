@@ -8,6 +8,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Tool for changing the dealer
+ */
+
 public class ChangeDealerTool extends MenuTool {
 
     public ChangeDealerTool(BGame bg, PlayerConfigMenu cm) {
@@ -27,7 +31,7 @@ public class ChangeDealerTool extends MenuTool {
 
     private class ClickHandler implements ActionListener {
 
-        // EFFECTS: tries to remove the selected player from the game
+        // EFFECTS: tries to set the selected player as the dealer;
         //          outputs an error message to the console if fails
         @Override
         public void actionPerformed(ActionEvent e) {

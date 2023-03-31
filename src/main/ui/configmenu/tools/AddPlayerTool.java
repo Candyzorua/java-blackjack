@@ -8,6 +8,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Tool for adding a player to the game
+ */
+
 public class AddPlayerTool extends MenuTool {
     private JTextField jtf;
 

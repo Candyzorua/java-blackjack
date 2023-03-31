@@ -7,6 +7,10 @@ import model.Round;
 
 import javax.swing.*;
 
+/**
+ * Tool for use during round execution
+ */
+
 public abstract class RoundTool {
     protected final Round round;
     protected PlayerPanel playerPanel;
@@ -36,6 +40,7 @@ public abstract class RoundTool {
         parent.add(button);
     }
 
+    // setters
     public void setPlayer(Player player) {
         this.player = player;
     }

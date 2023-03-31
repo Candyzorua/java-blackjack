@@ -19,7 +19,7 @@ public class PlayerStatsPanel extends JPanel {
     protected final PlayerTable dealerTable;
     protected final PlayerSelector playerSelector;
 
-    // EFFECTS: constructs a panel with player stats
+    // EFFECTS: constructs a panel loaded with stats of players from the given game
     public PlayerStatsPanel(BGame bg) {
         this.bg = bg;
         playerTable = new PlayerTable();

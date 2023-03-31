@@ -6,6 +6,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Tool to be activated when player is finished setting wagers
+ */
+
 public class DoneTool extends GameTool {
     private final WagerTaker wt;
 
@@ -14,12 +18,16 @@ public class DoneTool extends GameTool {
         this.wt = wt;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates button for tool
     @Override
     public void createButton(JComponent parent) {
         button = new JButton("Done");
         addToParent(parent);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a listener for this tool
     @Override
     public void addListener() {
         button.addActionListener(new DoneTool.ClickHandler());

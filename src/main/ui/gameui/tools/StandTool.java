@@ -11,6 +11,10 @@ import java.awt.event.ActionListener;
 
 import static model.RoundStatus.STAND;
 
+/**
+ * Tool that lets players stand
+ */
+
 public class StandTool extends RoundTool {
 
     public StandTool(Round round, Player player, PlayerPanel playerPanel, RoundUI roundUI) {

@@ -8,6 +8,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Tool for removing players
+ */
+
 public class RemovePlayerTool extends MenuTool {
 
     public RemovePlayerTool(BGame bg, PlayerConfigMenu cm) {

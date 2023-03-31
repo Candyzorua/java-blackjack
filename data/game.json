@@ -1,25 +1,29 @@
 {
-    "numOfRounds": "2",
+    "numOfRounds": "1",
     "players": [
         {
-            "score": "52",
+            "score": "-26",
             "name": "Jin"
         },
         {
-            "score": "52",
-            "name": "Mikayla"
-        },
-        {
-            "score": "0",
-            "name": "Victor"
-        },
-        {
-            "score": "0",
+            "score": "-16",
             "name": "Leona"
         },
         {
-            "score": "-104",
+            "score": "-42",
+            "name": "Leon"
+        },
+        {
+            "score": "-44",
             "name": "Amy"
+        },
+        {
+            "score": "-16",
+            "name": "Mikayla"
+        },
+        {
+            "score": "144",
+            "name": "Dan"
         }
     ]
 }

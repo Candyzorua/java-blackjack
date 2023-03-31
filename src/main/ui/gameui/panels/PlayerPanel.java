@@ -6,6 +6,10 @@ import model.Player;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A panel for a single player
+ */
+
 public abstract class PlayerPanel extends JPanel {
     private static final int WIDTH = 200;
     private static final int HEIGHT = 200;
@@ -24,13 +28,19 @@ public abstract class PlayerPanel extends JPanel {
         setBackgroundColor();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds panel text relevant to the player
     public abstract void addLabels();
 
+    // MODIFIES: this
+    // EFFECTS: adds a table showing the player's current hand
     private void addHandTable() {
         handTable = new HandTable(player.getHand().getContents());
         this.add(handTable);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the background color of the player panel
     private void setBackgroundColor() {
         if (active) {
             this.setBackground(Color.WHITE);

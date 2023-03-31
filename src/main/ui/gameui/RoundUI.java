@@ -16,6 +16,10 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Panel for Blackjack round execution
+ */
+
 public class RoundUI extends JPanel {
     private final HashMap<Player, PlayerPanel> playerMap = new HashMap<>();
     private List<Player> playerList;

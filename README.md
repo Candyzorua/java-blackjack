@@ -85,3 +85,7 @@ menu, or save and quit to the title screen.
     
 - You can reload the state of my application by...
     - Starting from the opening panel, click "Load previous game".
+
+## Citations
+- Data persistence modeled after JsonSerializationDemo by the UBC CPSC 210 team.
+- Drew inspiration from SimpleDrawingPlayer and AlarmSystem.

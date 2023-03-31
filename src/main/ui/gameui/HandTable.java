@@ -6,6 +6,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
+/**
+ * Displays a single player's current hand
+ */
+
 public class HandTable extends JTable {
     String[][] data = {};
     String[] column = {"HAND"};
@@ -21,6 +25,7 @@ public class HandTable extends JTable {
         this.repopulate(handList);
     }
 
+    // MODIFIES: this
     // EFFECTS: clears table and then fills it
     public void repopulate(List<Card> handList) {
         model.setRowCount(0);
