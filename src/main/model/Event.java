@@ -3,6 +3,10 @@ package model;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * An event to be logged
+ */
+
 public class Event {
     private static final int HASH_CONSTANT = 13;
     private final Date dateLogged;

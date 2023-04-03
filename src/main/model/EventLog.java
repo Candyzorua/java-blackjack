@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * A logger for events
+ */
+
 public class EventLog implements Iterable<Event> {
     /**
      * the only EventLog in the system (Singleton Design Pattern)
