@@ -93,9 +93,8 @@ Firstly, I would apply the Singleton design pattern to BGameUI and BGame. Only o
 be instantiated throughout the whole program, and they are used by many other classes. Thus, it would be convenient to have global
 access to these classes and ensure that we do not accidentally instantiate separate instances. Secondly, I would apply the observer
 pattern, with BGame being the subject whereas PlayerSelector and PlayerTable are the observers. That way,
-we can update PlayerSelector and PlayerTable every time BGame is modified, without PlayerSelector and PlayerTable knowing too much about
-BGame and vice versa. Thirdly, I would make BGame and Round implement Iterable, so that other classes can iterate over BGame and Round without
-knowing too much about their internal implementation. 
+we can update PlayerSelector and PlayerTable every time BGame is modified, without PlayerSelector and PlayerTable being too tightly coupled with
+BGame and vice versa. Thirdly, I would make BGame and Round implement Iterable, so that other classes can iterate over BGame and Round without being too tightly coupled with these two classes. 
 
 ## Citations
 - Data persistence modeled after JsonSerializationDemo by the UBC CPSC 210 team.
