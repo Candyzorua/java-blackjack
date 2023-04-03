@@ -36,9 +36,11 @@ public class BGame implements Playable, Writable {
     //          return true if success, false if failure
     public boolean addPlayer(Player player) {
         if (isPlayerWithNameIn(player.getName())) {
+            EventLog.getInstance().logEvent(new Event("Failed to add " + player.getName() + "."));
             return false;
         } else {
             regularPlayerList.add(player);
+            EventLog.getInstance().logEvent(new Event("New player " + player.getName() + " added."));
             return true;
         }
     }
@@ -50,9 +52,11 @@ public class BGame implements Playable, Writable {
     //          return true if success, false if failure
     public boolean removePlayer(Player player) {
         if (!regularPlayerList.contains(player) | (regularPlayerList.size() <= MIN_PLAYERS)) {
+            EventLog.getInstance().logEvent(new Event("Failed to remove " + player.getName() + "."));
             return false;
         } else {
             regularPlayerList.remove(player);
+            EventLog.getInstance().logEvent(new Event("Player " + player.getName() + " removed."));
             return true;
         }
     }

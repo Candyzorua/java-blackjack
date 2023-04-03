@@ -50,6 +50,7 @@ public class Player implements Writable {
     public void dealInitialCards(CardDeck cd) {
         hand.addCard(cd);
         hand.addCard(cd);
+        EventLog.getInstance().logEvent(new Event("Player " + name + " dealt initial hand."));
     }
 
     // MODIFIES: this, cd
@@ -82,11 +83,11 @@ public class Player implements Writable {
 
     // EFFECTS: displays the entire hand in string format
     public String getHandAsString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (Card c: hand.getContents()) {
-            result += (c.cardToString() + " | ");
+            result.append(c.cardToString()).append(" | ");
         }
-        return result;
+        return result.toString();
     }
 
     public int getWager() {

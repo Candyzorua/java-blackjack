@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import ui.closingpanel.ClosingPanel;
 import ui.configmenu.PlayerConfigMenu;
 import ui.gameui.RoundUI;
@@ -24,11 +26,16 @@ public class BGameUI extends JPanel {
     private BGame bg;
     private final GameLoader gameLoader;
     private final GameSaver gameSaver;
+    private final JFrame frame;
 
     // EFFECTS: constructs a new BGameUI showing the opening panel
     public BGameUI() {
         gameLoader = new GameLoader();
         gameSaver = new GameSaver();
+
+        frame = new JFrame();
+        frame.setSize(300, 300);
+
         this.setSize(WIDTH, HEIGHT);
         this.setLayout(cardLayout);
         this.add("OpeningPanel", new OpeningPanel(this));
@@ -90,13 +97,26 @@ public class BGameUI extends JPanel {
 
     // EFFECTS: exits the program
     public void exitGame() {
-        System.exit(0);
+        logEvents();
+        frame.dispose();
+    }
+
+    // EFFECTS: prints event log to console
+    public void logEvents() {
+        EventLog theLog = EventLog.getInstance();
+        for (Event e: theLog) {
+            System.out.println(e.toString());
+        }
+    }
+
+    // getters
+    public JFrame getFrame() {
+        return frame;
     }
 
     public static void main(String[] args) {
         BGameUI gui = new BGameUI();
-        JFrame frame = new JFrame();
-        frame.setSize(300, 300);
+        JFrame frame = gui.getFrame();
         frame.add(gui);
         frame.setVisible(true);
     }

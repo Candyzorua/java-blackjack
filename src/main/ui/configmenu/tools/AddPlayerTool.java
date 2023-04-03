@@ -43,11 +43,7 @@ public class AddPlayerTool extends MenuTool {
         @Override
         public void actionPerformed(ActionEvent e) {
             String name = jtf.getText();
-            if (!bg.addPlayer(new Player(name, 0))) {
-                System.out.println("Sorry, a player with that name already exists.");
-            } else {
-                System.out.println("Player successfully added.");
-            }
+            bg.addPlayer(new Player(name, 0));
             cm.refreshPlayers(bg.getRegularPlayers(), bg.getDealer());
         }
     }

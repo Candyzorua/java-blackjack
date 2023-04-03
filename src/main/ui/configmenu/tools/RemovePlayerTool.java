@@ -37,11 +37,7 @@ public class RemovePlayerTool extends MenuTool {
         public void actionPerformed(ActionEvent e) {
             String name = getSelectedPlayerName();
             Player toRemove = bg.selectPlayer(name);
-            if (!bg.removePlayer(toRemove)) {
-                System.out.println("Sorry, unable to remove that player.");
-            } else {
-                System.out.println("Player successfully removed.");
-            }
+            bg.removePlayer(toRemove);
             cm.refreshPlayers(bg.getRegularPlayers(), bg.getDealer());
         }
     }

@@ -37,11 +37,7 @@ public class ChangeDealerTool extends MenuTool {
         public void actionPerformed(ActionEvent e) {
             String name = getSelectedPlayerName();
             Player toSetAsDealer = bg.selectPlayer(name);
-            if (!bg.setPlayerAsDealer(toSetAsDealer)) {
-                System.out.println("Sorry, unable to set that player as the dealer.");
-            } else {
-                System.out.println("Player successfully set as dealer.");
-            }
+            bg.setPlayerAsDealer(toSetAsDealer);
             cm.refreshPlayers(bg.getRegularPlayers(), bg.getDealer());
         }
     }

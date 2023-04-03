@@ -63,6 +63,7 @@ public class Round implements Playable {
         if (p.getHandSize() > 21) {
             p.setStatus(RoundStatus.BUST);
         }
+        EventLog.getInstance().logEvent(new Event("Player " + p.getName() + " hit."));
         return p.getStatus();
     }
 
