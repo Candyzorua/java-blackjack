@@ -14,8 +14,6 @@ import java.util.List;
  */
 
 public class WagerTaker extends JPanel {
-    private static final int WIDTH = 200;
-    private static final int HEIGHT = 200;
     private final List<WagerSlider> wagerSliderList;
     private final BGame bg;
     private final BGameUI gui;

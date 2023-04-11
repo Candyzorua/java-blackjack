@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public class PlayerSelector extends JComboBox<String> implements Populatable {
-    DefaultComboBoxModel<String> model;
+    private final DefaultComboBoxModel<String> model;
 
     // EFFECTS: constructs an empty player selector dropdown menu
     public PlayerSelector() {
