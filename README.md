@@ -88,6 +88,38 @@ menu, or save and quit to the title screen.
 
 ## Phase 4
 
+### Task 2
+Tue Apr 11 12:31:54 PDT 2023
+New player Jin added.
+Tue Apr 11 12:31:54 PDT 2023
+New player Mikayla added.
+Tue Apr 11 12:31:54 PDT 2023
+New player Victor added.
+Tue Apr 11 12:31:54 PDT 2023
+New player Leona added.
+Tue Apr 11 12:31:54 PDT 2023
+New player Amy added.
+Tue Apr 11 12:31:58 PDT 2023
+New player Amy added.
+Tue Apr 11 12:32:02 PDT 2023
+Player Victor removed.
+Tue Apr 11 12:32:08 PDT 2023
+Player Jin dealt initial hand.
+Tue Apr 11 12:32:08 PDT 2023
+Player Mikayla dealt initial hand.
+Tue Apr 11 12:32:08 PDT 2023
+Player Leona dealt initial hand.
+Tue Apr 11 12:32:08 PDT 2023
+Player Amy dealt initial hand.
+Tue Apr 11 12:32:08 PDT 2023
+Player Amy dealt initial hand.
+Tue Apr 11 12:32:10 PDT 2023
+Player Jin hit.
+Tue Apr 11 12:32:12 PDT 2023
+Player Leona hit.
+Tue Apr 11 12:32:12 PDT 2023
+Player Amy hit.
+
 ### Task 3
 Firstly, I would apply the Singleton design pattern to BGameUI and BGame. Only one instance of BGameUI and BGame is required to 
 be instantiated throughout the whole program, and they are used by many other classes. Thus, it would be convenient to have global
