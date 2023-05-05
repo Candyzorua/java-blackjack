@@ -1,5 +1,5 @@
 # Java Blackjack 
-#### 2022W2 CPSC 210 Term Project by Jiaying Ong
+#### by Jiaying Ong
 
 <br>
 
@@ -60,79 +60,8 @@ menu, or save and quit to the title screen.
 ### GUI Implementation
 - All functionality preserved from Phase 2 except ability to continue to next round after finishing a round (only given option to save game and quit game)
 
-### Instructions for Grader
-- You can generate the first required action related to adding Xs to a Y by...
-    - The first required action is adding a new player to the game.
-    - Starting from the opening panel, click "Start new game" or "Load previous game".
-    - Type the name of the new player. Click "Add player".
-    
-- You can generate the second required action related to adding Xs to a Y by...
-    - The second required action is letting a player hit during a round of Blackjack.
-    - Starting from the opening panel, click "Start new game" or "Load previous game".
-    - Configure players, then click "Continue".
-    - Toggle wagers, then click "Done". 
-    - The current player is the panel that is white in color. Click "Hit" to deal a card to that player.
-    
-- You can locate my visual component by...
-    - The opening panel has an image of the logo.
-    
-- You can save the state of my application by...
-    - Starting from the opening panel, click "Start new game" or "Load previous game".
-    - Configure players, then click "Continue".
-    - Toggle wagers, then click "Done". 
-    - Press "Hit" or "Stand" until all players have finished their turn and the round ends.
-    - Press "Save".
-    
-- You can reload the state of my application by...
-    - Starting from the opening panel, click "Load previous game".
+## Phase 4 Notes
 
-## Phase 4
-
-### Task 2
-Tue Apr 11 12:31:54 PDT 2023
-New player Jin added.
-Tue Apr 11 12:31:54 PDT 2023
-New player Mikayla added.
-Tue Apr 11 12:31:54 PDT 2023
-New player Victor added.
-Tue Apr 11 12:31:54 PDT 2023
-New player Leona added.
-Tue Apr 11 12:31:54 PDT 2023
-New player Amy added.
-Tue Apr 11 12:31:58 PDT 2023
-New player Amy added.
-Tue Apr 11 12:32:02 PDT 2023
-Player Victor removed.
-Tue Apr 11 12:32:08 PDT 2023
-Player Jin dealt initial hand.
-Tue Apr 11 12:32:08 PDT 2023
-Player Mikayla dealt initial hand.
-Tue Apr 11 12:32:08 PDT 2023
-Player Leona dealt initial hand.
-Tue Apr 11 12:32:08 PDT 2023
-Player Amy dealt initial hand.
-Tue Apr 11 12:32:08 PDT 2023
-Player Amy dealt initial hand.
-Tue Apr 11 12:32:10 PDT 2023
-Player Jin hit.
-Tue Apr 11 12:32:12 PDT 2023
-Player Leona hit.
-Tue Apr 11 12:32:12 PDT 2023
-Player Amy hit.
-
-### Task 3
-Firstly, I would apply the Singleton design pattern to BGameUI and BGame. Only one instance of BGameUI and BGame is required to 
-be instantiated throughout the whole program, and they are used by many other classes. Thus, it would be convenient to have global
-access to these classes and ensure that we do not accidentally instantiate separate instances. Secondly, I would apply the observer
-pattern, with BGame being the subject whereas PlayerSelector and PlayerTable are the observers. That way,
-we can update PlayerSelector and PlayerTable every time BGame is modified, without PlayerSelector and PlayerTable being too tightly coupled with
-BGame and vice versa. Thirdly, I would make BGame and Round implement Iterable, so that other classes can iterate over BGame and Round without being too tightly coupled with these two classes. 
-
-### Changes:
-- Added event logging functionality.
+### Logging functionality
+- Adding and removing players as well as dealing cards are now logged in the console.
 - Added UML class diagram.
-
-## Citations
-- Data persistence modeled after JsonSerializationDemo by the UBC CPSC 210 team.
-- Drew inspiration from SimpleDrawingPlayer and AlarmSystem.
-- Event and EventLog from AlarmSystem.
