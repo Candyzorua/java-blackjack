@@ -16,7 +16,7 @@ import java.util.stream.Stream;
  */
 
 public class JsonReader {
-    private String source;
+    private final String source;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
@@ -36,7 +36,7 @@ public class JsonReader {
         StringBuilder contentBuilder = new StringBuilder();
 
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
-            stream.forEach(s -> contentBuilder.append(s));
+            stream.forEach(contentBuilder::append);
         }
 
         return contentBuilder.toString();
@@ -45,7 +45,8 @@ public class JsonReader {
     // EFFECTS: parses BGame from JSON object and returns it
     private BGame parseBGame(JSONObject jsonObject) {
         int numOfRounds = Integer.parseInt(jsonObject.getString("numOfRounds"));
-        BGame bg = new BGame(numOfRounds);
+        BGame bg = BGame.getInstance();
+        bg.setNumOfRounds(numOfRounds);
         addSavedPlayers(bg, jsonObject);
         return bg;
     }

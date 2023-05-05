@@ -8,25 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A single game of Blackjack
+ * A single game of Blackjack.
+ * Implements the Singleton design pattern.
  */
 
 public class BGame implements Playable, Writable {
 
+    public static final int MIN_PLAYERS = 4;
+    private static final BGame singleton = new BGame();
+
+    public static BGame getInstance() {
+        return singleton;
+    }
+
     private final List<Player> regularPlayerList;
     private Player dealer;
     private int numOfRounds;
-    public static final int MIN_PLAYERS = 4;
 
     // EFFECTS: constructs a new game of blackjack with an empty list of players
-    public BGame() {
+    private BGame() {
         numOfRounds = 0;
-        regularPlayerList = new ArrayList<>();
-    }
-
-    // EFFECTS: constructs a new game of blackjack with an empty list of players and given number of rounds
-    public BGame(int n) {
-        numOfRounds = n;
         regularPlayerList = new ArrayList<>();
     }
 
@@ -136,6 +137,10 @@ public class BGame implements Playable, Writable {
             dealer = new Player(player.getName(), player.getScore());
             return true;
         }
+    }
+
+    public void setNumOfRounds(int numOfRounds) {
+        this.numOfRounds = numOfRounds;
     }
 
     // EFFECTS: converts the BGame to a JSON object

@@ -46,7 +46,7 @@ public class GameLoader {
     // MODIFIES: bg
     // EFFECTS: loads the default players into the game
     public BGame loadDefaultPlayers() {
-        BGame bg = new BGame();
+        BGame bg = BGame.getInstance();
         Player p1 = new Player("Jin", 0);
         Player p2 = new Player("Mikayla", 0);
         Player p3 = new Player("Victor", 0);
