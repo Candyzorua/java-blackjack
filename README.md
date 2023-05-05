@@ -128,6 +128,10 @@ pattern, with BGame being the subject whereas PlayerSelector and PlayerTable are
 we can update PlayerSelector and PlayerTable every time BGame is modified, without PlayerSelector and PlayerTable being too tightly coupled with
 BGame and vice versa. Thirdly, I would make BGame and Round implement Iterable, so that other classes can iterate over BGame and Round without being too tightly coupled with these two classes. 
 
+### Changes:
+- Added event logging functionality.
+- Added UML class diagram.
+
 ## Citations
 - Data persistence modeled after JsonSerializationDemo by the UBC CPSC 210 team.
 - Drew inspiration from SimpleDrawingPlayer and AlarmSystem.
